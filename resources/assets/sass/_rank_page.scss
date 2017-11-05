@@ -1,0 +1,29 @@
+.panel-body>a{
+    display:inline;
+}
+
+.my-flex-card > div.card-block {
+    height: calc(100% - 15px);
+    margin-bottom: 15px;
+}
+
+
+.resize-card{
+
+    height: 88px;
+
+}
+.color{
+    &-1 {
+        background-color: lighten($orange-color, 20);
+    }
+    &-2 {
+        background-color: lighten($orange-color, 35) ;
+    }
+    &-3 {
+        background-color: lighten($orange-color, 45) ;
+    }
+    &-user {
+        background-color: lighten($light-primary-color, 0) ;
+    }
+}

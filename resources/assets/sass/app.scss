@@ -5,5 +5,175 @@
 // Variables
 @import "variables";
 
-// Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+// Bootstrap v4
+@import "node_modules/bootstrap/scss/bootstrap";
+
+// Font-awesome
+$fa-font-path:        "../../fonts" ;
+
+@import "node_modules/font-awesome/scss/font-awesome.scss";
+
+body {
+  padding-top: 56px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.userRank-font{
+  font-weight: bold;
+  font-family: 'Lato', sans-serif;
+}
+
+.custumSlick{
+  margin: 0;
+  padding: 0px;
+  width: 100%;
+}
+.text-color{
+  color: orange;
+}
+
+.card-header{
+  background-color: $primary-color;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  padding-right: 16px;
+  padding-left: 16px;
+  border: 0px;
+}
+.card-title{
+  line-height: 24px;
+  padding-bottom: 14px;
+  margin-bottom: 0px;
+  color: $cloud;
+}
+.card-subtitle{
+  line-height: 16px;
+  color: $secondary-text;
+}
+
+.card-block{
+  padding-bottom: 16px;
+  padding-top: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.input-group-addon{
+  border: 0px;
+  width: 40px;
+}
+.form-control{
+  border: 0px;
+  line-height: 24px;
+}
+.btn{
+  font-size: 16px;
+  border: 0px;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  line-height: 24px;
+}
+.btn-success{
+  background-color: $orange-color !important;
+  color: #212121;
+}
+.Line-height-profile{
+  line-height: 16px;
+}
+.Rail-way-font{
+  font-family: 'Raleway', sans-serif !important;
+}
+.Lato-font{
+  font-family: $font-family-Lato !important;
+}
+.Font-dark{
+  color:#212121 !important;
+}
+
+.Font-light{
+  color: $cloud !important;
+}
+.fileUpload {
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+}
+.fileUpload input.upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.fileInput{
+  width: 230px;
+}
+.customUpload{
+  width: 48px;
+  height: 30px;
+  padding-right: 8px;
+  padding-left: 8px;
+}
+.uploadCustom{
+  width: 30px;
+  height: 23px;
+  border-top: 3px;
+  border-bottom: 1px;
+  border-left:1px;
+  border-right: 1px;
+}
+.Bg-color-midnight{
+  background-color: $cloud !important;
+}
+.form-group.has-error > span > strong {
+  color: red !important;
+}
+
+.Bg-color-cloud{
+  background-color: $cloud !important;
+}
+
+::-webkit-scrollbar {
+  width: 1px;
+  height: 1px;
+}
+.wrapper {
+  width: auto;
+  height:210px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  & div {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.btn-success:disabled{
+  color: $primary-text-color;
+}
+
+@import "welcome_page";
+// Layout of the webapp after login
+@import "new_app_layout.scss";
+
+// Stylings for home page
+@import "home_page";
+
+// Stylings for mysurvey page
+@import "mysurvey";
+
+// Stylings for challenge_page
+@import "challenge_page";
+
+// Stylings for achievement_page
+@import "achievement_page";
+
+// Stylings for profile_page
+@import "profile_page";
+
+// Stylings for rank_page
+@import "rank_page";

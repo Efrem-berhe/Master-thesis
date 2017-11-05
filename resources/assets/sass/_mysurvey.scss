@@ -1,0 +1,141 @@
+
+.category-fix-width {
+    width: 106px;
+    margin-bottom: 0;
+}
+
+.item .sector{transition:all .1s linear;stroke:#111;}
+.menu-trigger{fill:#EA2A55;pointer-events:auto;}
+.menu-trigger:hover,.menu-trigger:focus{cursor:pointer;}
+symbol{overflow:visible;}
+
+
+.svg-content {
+	display: inline-block;
+	top: 0;
+}
+
+.svg-container {
+	display: inline-block;
+	position: relative;
+	width: 60%;
+
+	vertical-align: middle;
+	overflow: hidden;
+}
+
+.my-flex-card {
+	height: calc(100%);
+	margin-bottom: 15px;
+}
+
+.Set-width {
+	padding-bottom: 0%;
+  padding-top: 0px;
+    border:0px;
+    min-height: 262px;
+  max-height:300px;
+}
+
+.Card-Height{
+	height: 200px !important;
+}
+
+.Text-font-size{
+	font-size: 30px !important;
+}
+.apptest-question-last{
+    font-weight: bold;
+}
+.likert-scale{
+  width: 60%;
+  margin:auto;
+}
+
+.rc-slider-dot-active {
+     border-color: #e9e9e9
+}
+.rc-slider-mark-text-active{
+    color:#2c3e50
+}
+.rc-slider-mark-text{
+    color:#2c3e50
+}
+.rc-slider {
+    height: 80px;
+    padding: 0px;
+    // width:118%;
+}
+//style for buttons scale
+$tint: darken(#BC8D06, 5);
+$colors: #4dbf4d,#a6c34c,#ffc84a,#f48847,#eb4841;
+.radioPad{
+  display: inline-block;
+  width: 100%;
+  vertical-align: middle;
+
+
+
+  &-wrapper{
+    display: block;
+    cursor: pointer;
+
+    color: $midnight-blue;
+    // text-transform: uppercase;
+    font-size: 1.5rem;
+    margin: 0.5rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    padding-right: 0.7rem;
+    padding-left: 0.7rem;
+    border-style: solid;
+    border-color: white;
+    text-align: center;
+    @for $i from 1 through length($colors) {
+      &:nth-child(#{$i}) {
+        background: lighten(nth($colors, $i),0);
+
+        &:hover{
+          background: darken(nth($colors, $i), 15);
+        }
+      }
+    }
+
+  &-0{
+      background: darken(nth($colors, 1), 15) !important;
+      border-style: solid;
+      border-color: $midnight-blue;
+      color:$cloud;
+  }
+  &-1{
+      background: darken(nth($colors, 2), 15) !important;
+      border-style: solid;
+      border-color: $midnight-blue;
+      color:$cloud;
+  }
+  &-2{
+      background: darken(nth($colors, 3), 15) !important;
+      border-style: solid;
+      border-color: $midnight-blue;
+      color:$cloud;
+  }
+  &-3{
+      background: darken(nth($colors, 4), 15) !important;
+      border-style: solid;
+      border-color: $midnight-blue;
+      color:$cloud;
+  }
+  &-4{
+      background: darken(nth($colors, 5), 12) !important;
+      border-style: solid;
+      border-color: $midnight-blue;
+      color:$cloud;
+  }
+}
+  &-radio {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+    opacity: 0;
+  }
+}

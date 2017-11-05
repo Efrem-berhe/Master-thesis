@@ -1,0 +1,13 @@
+.Background-color-odd{
+  background-color: $emerald !important;
+}
+
+.Background-color-even{
+  background-color: $emerald !important;
+}
+
+.grayscale{
+  filter: gray; /* IE6-9 */
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+}
