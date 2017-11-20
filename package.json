@@ -6,6 +6,7 @@
   },
   "devDependencies": {
     "bootstrap": "4.0.0-alpha.6",
+    "css-loader": "^0.28.7",
     "font-awesome": "^4.7.0",
     "gulp": "^3.9.1",
     "jquery": "^3.1.0",
@@ -14,9 +15,25 @@
     "laravel-elixir-webpack-official": "^1.0.2",
     "laravel-elixir-webpack-react": "^1.0.1",
     "lodash": "^4.16.2",
-    "vue": "^2.0.1",
-    "vue-resource": "^1.0.3",
     "react": "^15.5.3",
-    "react-dom": "^15.5.3"
+    "react-dom": "^15.5.3",
+    "style-loader": "^0.19.0",
+    "vue": "^2.0.1",
+    "vue-resource": "^1.0.3"
+  },
+  "dependencies": {
+    "nw-react-slider": "^2.0.1",
+    "prop-types": "^15.6.0",
+    "rc-progress": "^2.1.1",
+    "rc-slider": "^8.4.0",
+    "react-addons-create-fragment": "^15.5.3",
+    "react-modal-dialog": "^4.0.7",
+    "react-radio-buttons": "^1.0.10",
+    "react-rangeslider": "^2.0.1",
+    "react-router-dom": "^4.1.1",
+    "react-slick": "^0.14.11",
+    "react-toolbox": "^2.0.0-beta.8",
+    "recharts": "^0.22.4",
+    "slick-carousel": "^1.6.0"
   }
 }

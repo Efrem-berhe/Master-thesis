@@ -13,11 +13,25 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\SomeEvent' => [
-            'App\Listeners\EventListener',
+
+        'App\Events\NewSurvey' => [
+            'App\Listeners\SaveSurvey',
         ],
+        'App\Events\Points' => [
+            'App\Listeners\AddPoints',
+        ],
+        'App\Events\IncreaseSurvey' => [
+            'App\Listeners\AchievementEventSubscriber',
+        ],
+        'App\Events\AvatarUpload' => [
+            'App\Listeners\AchievementEventSubscriber',
+        ],
+
     ];
 
+    protected $subscribe = [
+        'App\Listeners\AchievementEventSubscriber',
+    ];
     /**
      * Register any events for your application.
      *

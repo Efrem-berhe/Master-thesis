@@ -8,6 +8,10 @@
 // Bootstrap v4
 @import "node_modules/bootstrap/scss/bootstrap";
 
+@import 'node_modules/rc-slider/assets/index';
+@import "node_modules/slick-carousel/slick/slick.scss";
+@import "node_modules/slick-carousel/slick/slick-theme.scss";
+
 // Font-awesome
 $fa-font-path:        "../../fonts" ;
 

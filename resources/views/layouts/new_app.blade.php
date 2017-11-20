@@ -11,7 +11,7 @@
     <link rel="stylesheet" href={{ elixir("css/app.css")}}>
 
 
-<link href="/css/introjs.css" rel="stylesheet">
+    <link href="/css/introjs.css" rel="stylesheet">
 
 <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -78,8 +78,8 @@
                     {{--PROFILE is in the collapsed meneu in sm screen --}}
                     <li id="id6" class="nav-item profile hidden-lg-up">
                         <a class="nav-link" data-toggle="dropdown" href="#">
-                            {{--<img src={{ Auth::user()->avatar }} class="rounded" style="width:20px;height: 20px;">--}}
-                            {{--{{ title_case(Auth::user()->name )}} <b class="caret"></b>--}}
+                            <img src={{ Auth::user()->avatar }} class="rounded" style="width:20px;height: 20px;">
+                            {{ title_case(Auth::user()->name )}} <b class="caret"></b>
                         </a>
 
                         <ul class="dropdown-menu dropdown-menu-right">
@@ -115,9 +115,9 @@
 
                 <div class="navbar-nav ml-auto hidden-md-down">
                     <a class="nav-link" data-toggle="dropdown" href="#">
-                        {{--<img src={{ Auth::user()->avatar }} class="rounded"--}}
-                        {{--style="width: 20px;height: 20px;">--}}
-                        {{--{{ title_case(Auth::user()->name )}} <b class="caret"></b>--}}</a>
+                        <img src={{ Auth::user()->avatar }} class="rounded"
+                        style="width: 20px;height: 20px;">
+                        {{ title_case(Auth::user()->name )}} <b class="caret"></b></a>
                         <ul class="dropdown-menu p-3 m-2 dropdown-menu-right">
                             <li class="dropdown-item list-group-item border-0">
                                 <div class="navbar-login">
@@ -125,15 +125,15 @@
                                         <div class="col-lg-5 p-0">
 
                                             <p class="text-center mb-2">
-                                                {{--<img src={{ Auth::user()->avatar }} class="rounded" style="width:100px; height: 100px;"/>--}}
+                                                <img src={{ Auth::user()->avatar }} class="rounded" style="width:100px; height: 100px;"/>
                                             </p>
 
                                             <button class="btn btn-success btn-sm Line-height-profile" onclick="window.location.href='/profile'">Change picture</button>
 
                                         </div>
                                         <div class="col-lg-7">
-                                            {{--<p class="text-left"><strong> {{ title_case(Auth::user()->name )}}</strong></p>--}}
-                                            {{--<p class="text-left small">{{ Auth::user()->email }}</p>--}}
+                                            <p class="text-left"><strong> {{ title_case(Auth::user()->name )}}</strong></p>
+                                            <p class="text-left small">{{ Auth::user()->email }}</p>
                                         </div>
                                     </div>
                                 </div>
