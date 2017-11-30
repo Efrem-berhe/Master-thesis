@@ -50,8 +50,11 @@ Route::post('survey/store', 'SurveyController@store_survey')->name('store.survey
 Route::get('survey/result', 'SurveyController@survey_result');
 
 
-//profile
-
 Route::resource('profile', 'ProfileController');
 Route::get('profile', 'ProfileController@index')->name("Profile");
 Route::post('uploadFile','ProfileController@upload_avatar');
+
+//Contacts
+Route::get('/contacts', 'ContactsController@index');
+Route::get('/contacts/{contact}','ContactsController@show');
+Route::post('/contacts','ContactsController@store');

@@ -13,7 +13,7 @@ class HomePage extends  Component {
     //we have to use state for the data that has to change
   constructor(Props) {
       super(Props);
-    this.state = {
+      this.state = {
       home:[],
       loaded:false,
       showLineChart: false,
@@ -41,13 +41,14 @@ class HomePage extends  Component {
 
 
     getData() {
+      console.log('getData');
         var url ="/home/1";
         $.ajax({
             method: "GET",
             url: url,
         })
             .done(function( result ) {
-                console.log(result)
+                console.log('result')
                 this.setState({home:result},function(){
                     this.setState({loaded:true}, function(){
                         if(this.state.home.flag==0){
@@ -60,13 +61,15 @@ class HomePage extends  Component {
     }
 
   componentWillMount(){
+    console.log('componentWillMount');
     this.getData();
   }
 
   componentDidMount(){
-
+console.log('componentDidMount');
   }
   render(){
+    console.log('render');
     if(!this.state.loaded)
       return (<h>loading</h>);
 

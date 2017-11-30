@@ -83,7 +83,7 @@ class ProfilePage extends Component {
 
                                             <label><input className="fileInput" type="file" size="200" onChange={this.handleImageChange}/></label>
 
-                                            <span class="input-group-addon">
+                                            <span className="input-group-addon">
                                             <button className="submitButton customUpload" type="submit" ><i className="fa fa-upload uploadCustom" aria-hidden="true"></i></button>
                                             </span>
                                         </div>

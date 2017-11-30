@@ -37,7 +37,7 @@
                 {{Route::currentRouteName()}}
             </a>
 
-            <div class="collapse navbar-collapse bg-nav" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse bg-nav" id="navbarSupportedContent" style="height:56px">
 
                 {{--navbar content for middle screen--}}
                 <ul class="navbar-nav pl-2">
@@ -65,6 +65,13 @@
                         <a class="nav-link " href={{url("rank")}} data-step="1" data-intro="This is a tooltip!">
                             <i class="fa fa-trophy" aria-hidden="true"></i>
                             Rank
+                        </a>
+                    </li>
+
+                    <li class="{{ ends_with(Request::url(), 'contacts') ? "active" : "" }}">
+                        <a class="nav-link " href={{url("contacts")}}>
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            Contacts
                         </a>
                     </li>
 

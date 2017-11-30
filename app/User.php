@@ -1,6 +1,8 @@
 <?php
 
 namespace App;
+use App\Contacts;
+
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -34,6 +36,12 @@ class User extends Authenticatable
         return $this->hasMany('App\Response');
     }
 
+    public function contacts(){
+
+      return $this->hasMany('App\Contacts');
+
+    }
+
     public function surveys()
     {
         return $this->belongsToMany('App\Survey')->withTimestamps()->withPivot('id');
@@ -43,6 +51,16 @@ class User extends Authenticatable
     public function achievements()
     {
         return $this->belongsToMany('App\Achievement')->withPivot('complete_rate','is_achieved')->withTimestamps();
+    }
+
+    public function addContact($role,$contact_id){
+
+        Contacts::create([
+          'role'=>$role,
+          'contact_id'=>$contact_id,
+          'user_id'=>$this->id
+        ]);
+
     }
 
     public function getSurveyResult()

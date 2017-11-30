@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 
+import ContactsPage from './contacts_page/ContactsPage';
 import RankPage from './rank_page/RankPage';
 import MySurvey  from './mysurvey_page/MySurvey';
 import AchievementPage from './achievement_page/AchievementPage'; //update the progress bar in achievement_page
@@ -44,8 +45,6 @@ if (document.getElementById('achievement_page')) {
         document.getElementById('achievement_page'));
 }
 
-
-
 if (document.getElementById('profile_page')) {
     ReactDOM.render(
         <ProfilePage/>,
@@ -58,6 +57,11 @@ if (document.getElementById('challenges_page')) {
         document.getElementById('challenges_page'));
 }
 
+if (document.getElementById('contacts_page')) {
+    ReactDOM.render(
+        <ContactsPage/>,
+        document.getElementById('contacts_page'));
+}
 
 // if (document.getElementById('footer')) {
 //     ReactDOM.render(
