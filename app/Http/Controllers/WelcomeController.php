@@ -14,12 +14,15 @@ class WelcomeController extends Controller
      */
     public function index()
     {
+
         if (Auth::guest())
         {
             return view('pages.welcome_page');
-        }else {
+        }else{
+
             return view('home');
-        }
+          }
+
     }
 
     /**

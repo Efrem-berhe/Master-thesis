@@ -29,29 +29,29 @@ class DisplayContacts extends Component {
 
   addSupervisor(userId){
     this.setState({
-      role:"Supervisor",
-      userid:userId
+      role:"supervisor",
+      userid:userId,
+      sendPost:true
     });
   }
 
   addFamily(userId){
-
     this.setState({
-      role:"Family",
+      role:"family",
       userid:userId,
       sendPost:true
     });
 
-  //  this.send();
+  //this.send();
 
 
   }
 
   addFriend(userId){
-
   this.setState({
-    role:"Friend",
-    userid:userId
+    role:"friend",
+    userid:userId,
+    sendPost:true
   });
 
   }
@@ -88,7 +88,7 @@ class DisplayContacts extends Component {
        type: "POST",
        url: "/contacts",
        dataType: 'json',
-       data: {user_id:this.state.userid , role:this.state.role},
+       data: {user_id:this.state.userid, role:this.state.role},
        success: function (response) {
          console.log(response);
 

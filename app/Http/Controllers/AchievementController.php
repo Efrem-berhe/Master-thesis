@@ -30,13 +30,22 @@ class AchievementController extends Controller
         return response()
             ->json($achievementFlag);
     }
+    public function show($id){
 
+      //$respondent_id=$request->input("user_id");
+      $user=\App\User::where('id',$id)->first();
+      $recentBadge= $user->achievements()->where('is_achieved',1)->orderBy('achievement_user.updated_at', 'desc')->first();
+
+      return response()
+          ->json($recentBadge);
+    }
     public function getAchievementData()
     {
         $user = Auth::user();
         $array=[];
 
         $collectedbadges= $user->achievements()->where('is_achieved',1)->orderBy('achievement_user.updated_at', 'desc')->get();
+
         $inProgressBadges= $user->achievements()->where('is_achieved',0)->get();
 
         $arrays = $user->achievements()->pluck('achievements.id')->toArray();
@@ -49,10 +58,12 @@ class AchievementController extends Controller
             'badges' =>$collectedbadges,
             'level' =>Auth::user()->level,
             'inProgressBadges'=>$inProgressBadges,
-            'availableBadges' =>$availableBadges,
+            'availableBadges' =>$availableBadges
+
         );
 
         return response()
             ->json($achievementData);
     }
+
 }

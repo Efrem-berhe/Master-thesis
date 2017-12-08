@@ -12,6 +12,8 @@ import AchievementPage from './achievement_page/AchievementPage'; //update the p
 import ProfilePage from './profile_page/ProfilePage';
 import ChallengesPage from './challenges_page/ChallengesPage';
 import FooterComponent from './welcome_page/FooterComponent';
+import RespondentPage from './respondents_page/RespondentPage';
+import SupervisorPage from './Supervisor/SupervisorPage';
 
 /**
  * include home page
@@ -63,8 +65,14 @@ if (document.getElementById('contacts_page')) {
         document.getElementById('contacts_page'));
 }
 
-// if (document.getElementById('footer')) {
-//     ReactDOM.render(
-//         <FooterComponent/>,
-//         document.getElementById('footer'));
-// }
+if (document.getElementById('respondents_page')) {
+    ReactDOM.render(
+        <RespondentPage/>,
+        document.getElementById('respondents_page'));
+}
+
+if (document.getElementById('supervisor_page')) {
+    ReactDOM.render(
+        <SupervisorPage/>,
+        document.getElementById('supervisor_page'));
+}

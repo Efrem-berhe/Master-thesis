@@ -43,6 +43,8 @@ Route::get('getRankFlag','RankController@getRankFlag');
 //achievement
 Route::get('achievement','AchievementController@getAchievement')->name("Achievement");
 Route::get('getAchievementData','AchievementController@getAchievementData');
+Route::get('getAchievementData/{id}','AchievementController@show');
+Route::post('/respondentData','AchievementController@respondentData');
 Route::get('getAchievementFlag','AchievementController@getAchievementFlag');
 
 Route::get('survey/create/{new}', 'SurveyController@create_survey')->name('new.survey');
@@ -55,6 +57,11 @@ Route::get('profile', 'ProfileController@index')->name("Profile");
 Route::post('uploadFile','ProfileController@upload_avatar');
 
 //Contacts
-Route::get('/contacts', 'ContactsController@index');
+Route::get('/contacts', 'ContactsController@index')->name("Contacts");
 Route::get('/contacts/{contact}','ContactsController@show');
 Route::post('/contacts','ContactsController@store');
+
+//supervisor controller
+
+Route::get('/supervisor','SupervisorController@index')->name("Supervisor");
+Route::get('supervisor/users','SupervisorController@respondent')->name("Supervisor/Users");;

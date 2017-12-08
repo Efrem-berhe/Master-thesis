@@ -2,16 +2,18 @@
 
 namespace App;
 use App\Contacts;
+use Illuminate\Support\Facades\Auth;
 
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\DB;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
 {
     use Notifiable;
-
+    use EntrustUserTrait;
     /**
      * The attributes that are mass assignable.
      *
@@ -30,16 +32,74 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    //one to many
+    public function contacts(){
+      return $this->hasMany('App\Contacts');
+
+    }
+
+    public function addContact($role, $contact_id){
+
+       $user = Auth::user();
+       $contact=new \App\Contacts;
+       $contact->contact_id = $contact_id;
+       $contact->user_id = $user->id;
+       $contact->role=$role;
+       $contact->save();
+
+       $update_user_role = \App\User::where('id',$contact_id)->first();
+       $role =\App\Role::where('id',$role)->first();
+       $update_user_role->role=$role->name;
+       $update_user_role->save();
+    // return $contact=\App\Contacts::create([
+    //       'role'=>$role,
+    //        'contact_id'=>$contact_id,
+    //
+    //        'user_id'=>$this->id,
+    //      ]);
+
+    return $contact;
+    }
+//one to many
+    public function roles(){
+      return $this->belongsToMany('App\Role');
+    }
+
+//check if user what type of role he have
+    public function hasAnyRole($roles){
+
+      if(is_array($roles)){
+        foreach ($roles as $role) {
+          if($this->hasRole($role)){
+            return true;
+          }
+        }
+      }else{
+        if($this->hasRole($roles)){
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    public function hasRole($role){
+
+      if($this->roles()->where('name',$role)->first())
+      {
+        return true;
+      }
+      return false;
+    }
+
+    // public function contacts(){
+    //
+    //   return $this->hasMany('App\Contacts');
+    //
+    // }
+
     public function responses()
     {
         return $this->hasMany('App\Response');
-    }
-
-    public function contacts(){
-
-      return $this->hasMany('App\Contacts');
-
     }
 
     public function surveys()
@@ -53,15 +113,16 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Achievement')->withPivot('complete_rate','is_achieved')->withTimestamps();
     }
 
-    public function addContact($role,$contact_id){
-
-        Contacts::create([
-          'role'=>$role,
-          'contact_id'=>$contact_id,
-          'user_id'=>$this->id
-        ]);
-
-    }
+    // public function addContact($contact_id){
+    //
+    //     $user = Auth::user();
+    //
+    //     Contacts::create([
+    //       'contact_id'=>$contact_id,
+    //       'user_id'=>$user->id,
+    //     ]);
+    //
+    // }
 
     public function getSurveyResult()
     {
@@ -187,4 +248,5 @@ class User extends Authenticatable
         );
         return $PlayerStatus;
     }
+
 }

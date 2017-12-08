@@ -20,6 +20,8 @@ class MySurvey extends Component {
     }
     handleOnclick(target) {
         console.log('in mysyrvey')
+        console.log('target');
+        console.log(target);
         if (target == 'survey'){
           this.setState({renderSurveyPage: true})
         }else {

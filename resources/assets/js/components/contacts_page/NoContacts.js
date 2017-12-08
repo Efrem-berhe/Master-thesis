@@ -19,11 +19,6 @@ class NoContacts extends Component {
 
   }
 
-
-
-
-
-
   addContact(){
      this.setState({
        renderContacts:false
@@ -43,7 +38,7 @@ class NoContacts extends Component {
                   <h6 className="card-subtitle">All your contacts</h6>
                 </div>
 
-                <div className="card-block">
+                <div className="card p-2">
                   <div className="text-center">
                   <img className="grayscale" src="./img/contacts.png" width="200" height="200"/>
                   <p className="grayscale"> You have no contacts. SinorLife is more interesting with family and friends</p>

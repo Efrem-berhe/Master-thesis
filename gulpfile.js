@@ -23,4 +23,6 @@ elixir((mix) => {
     mix.copy('resources/assets/sass/*.css','public/css'); //copy introjs files  to public/css
     mix.copy('resources/assets/js/intro.js','public/js'); //copy introjs files  to public/js
     mix.copy('resources/assets/js/tour.js','public/js'); //copy introjs files  to public/js
+    mix.copy('resources/assets/js/supervisor.js','public/js'); //copy introjs files  to public/js
+
 });

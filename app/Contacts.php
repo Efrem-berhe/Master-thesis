@@ -1,35 +1,14 @@
 <?php
-
-namespace App;
 use App\User;
+namespace App;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Contacts extends Model
-
-
 {
+    public function users(){
 
-  protected $fillable = [
-      'role', 'contact_id', 'user_id',
-  ];
+      return $this->belongsTo('App\User');
 
-  public function users(){
-
-    return $this->belongsTo('App\User');
-
-  }
-
-  public function contacts(){
-
-     $user = DB::table('users')
-            ->join('contacts', 'users.id', '=', 'contacts.contact_id')
-            ->select('users.*')
-            ->get();
-
-      return $user;
-
-  }
-
+    }
 }

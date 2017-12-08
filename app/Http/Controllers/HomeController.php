@@ -19,6 +19,9 @@ class HomeController extends Controller
     public function index()
     {
         $current_page="home";
+        $user = Auth::user();
+        $role = $user->roles()->first();
+        $user_role = $role->name;
         return view('home' , ['current_page' => $current_page]);
     }
 
@@ -52,6 +55,11 @@ class HomeController extends Controller
     public function show($id)
     {
         $user = Auth::user();
+        $role=$user->roles()->first();
+        $user_role = $role->name;
+        //respondent survey result
+        $respondentSurvey=\App\User::where('id',$id)->first();
+        $respondentSurveyResult = $respondentSurvey->getSurveyResult();
 
         $surveyResult=$user->getSurveyResult();
         $rankUsers= \App\User::orderBy('point','desc')->get();
@@ -65,7 +73,9 @@ class HomeController extends Controller
             'inProgressBadges'=>$inProgressBadges,
             'rankUsers' => $rankUsers,
             'currentUser' =>$user,
-            'users'=>$users
+            'users'=>$users,
+            'user_role'=>$user_role,
+            'respondentSurvey'=>$respondentSurveyResult
         );
         Auth::user()->flag = 1;
         Auth::user()->save();

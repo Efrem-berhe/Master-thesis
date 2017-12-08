@@ -18,6 +18,7 @@ class HomePage extends  Component {
       loaded:false,
       showLineChart: false,
       category:"",
+
     };
 
   HomePage.protoType={
@@ -49,7 +50,8 @@ class HomePage extends  Component {
         })
             .done(function( result ) {
                 console.log('result')
-                this.setState({home:result},function(){
+                this.setState({home:result,
+                },function(){
                     this.setState({loaded:true}, function(){
                         if(this.state.home.flag==0){
                             sessionStorage.setItem('firstvisit', this.state.home.flag);
@@ -72,7 +74,6 @@ console.log('componentDidMount');
     console.log('render');
     if(!this.state.loaded)
       return (<h>loading</h>);
-
     return (
       <div>
         <div className="Rail-way-font">
@@ -87,7 +88,7 @@ console.log('componentDidMount');
 
                 <div className="row">
                   <div className="col-md-6 ">
-                    <div className="card-block ">
+                    <div className="card-block">
                         <HomePageRadarChart chartData={this.state.home.surveyResult}  showLineChart={this.showLineChart}/>
                     </div>
 
@@ -150,17 +151,13 @@ console.log('componentDidMount');
                                       currentUser = {this.state.home.currentUser}
                                       mode = 'short'
                                   />
-
                               </div>
                           </div>
                       </div>
                   </div>
-
             </div>
-
           </div>
         </div>
-
       </div>
         );
     }

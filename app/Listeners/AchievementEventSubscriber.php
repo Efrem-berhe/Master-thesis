@@ -14,8 +14,12 @@ class AchievementEventSubscriber
      * Handle user login events.
      */
     public function onRegister($event) {
+
         $badge = \App\Achievement::where('title','Welcome aboard')->first();
         $event->user->achievements()->attach($badge->id, ['complete_rate'=>1, 'is_achieved'=>true ]);
+
+        $role_user=\App\Role::where('name','user')->first();
+        $event->user->roles()->attach($role_user);
         event(new Points($event->user, $badge->point));
     }
 

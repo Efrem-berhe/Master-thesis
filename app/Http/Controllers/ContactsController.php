@@ -1,15 +1,17 @@
 <?php
+use App\Role;
+use App\User;
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
+
 /**
 *
 * Loading our model
 */
-
 
 class ContactsController extends Controller
 {
@@ -52,11 +54,24 @@ class ContactsController extends Controller
         //get the current user
          //$contact = new \App\Contacts;
 
+
+
+
          $user = Auth::user();
          $role = $request->input("role");
          $contact_id=$request->input("user_id");
+         //$contact = User::where('id', 1)->first();
+         //$contact_role = $contact->roles()->first();
 
-         $user->addContact($role,$contact_id);
+         $contact_role = \App\Role::where('name',$role)->select('id')->first();
+         //$user->roles()->attach($role);
+         $user = $user->addContact($contact_role->id, $contact_id);
+
+         $newContact = \App\User::where('id', $contact_id)->first();
+         $newContact->roles()->detach();
+         $role_user=\App\Role::where('name',$role)->first();
+         $newContact->roles()->attach($role_user);
+
         //dd($request->input("role"));
          // $contact->role = $request->input("role");
          // $contact->user_id=$user->id;
@@ -79,8 +94,9 @@ class ContactsController extends Controller
       // $contacts->save();
 
     // $user = User::addContact($role , $userid);
-
+      redirect('/contacts');
       return response()->json($user);
+
     }
 
     /**
@@ -94,12 +110,26 @@ class ContactsController extends Controller
 
 
       $user = Auth::user();
-      $users = \App\User::whereNotIn('id', [$user->id])->get();
-      $contacts = \App\Contacts::where('user_id','=', $user->id)->get();
-    //  $userContacts = $user->contacts();
+      //get user  role
+      $role=$user->roles()->first();
+      $user_role = $role->name;
 
-    $userContacts = DB::table('users')
-            ->join('contacts', 'users.id', '=', 'contacts.contact_id')
+      $users = \App\User::whereNotIn('id', [$user->id])->get();
+
+      //get user contacts
+       $contacts = \App\Contacts::where('user_id','=', $user->id)->get();
+       $userContacts = $user->contacts();
+
+       //get user respondents
+        //$respondents = \App\Contacts::where('contact_id','=', $user->id)->get();
+
+      $respondents = DB::table('users')
+      ->join('contacts','users.id','=','contacts.user_id')
+      ->where('contacts.contact_id','=',$user->id)->select('users.*')->get();
+
+
+       $userContacts = DB::table('users')
+             ->join('contacts', 'users.id', '=', 'contacts.contact_id')
             ->select('users.*')
             ->where('contacts.user_id','=',$user->id)
             ->get();
@@ -107,8 +137,10 @@ class ContactsController extends Controller
 
       $users = array(
         'users'=>$users,
+        'user_role'=>$user_role,
         'contacts'=>$contacts,
-        'usersContacts'=>$userContacts
+        'usersContacts'=>$userContacts,
+        'respondents'=>$respondents
       );
 
       return response()

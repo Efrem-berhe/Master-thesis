@@ -49,7 +49,7 @@ showContact(){
   }
 
     render() {
-      console.log(this.state.contacts);
+      //console.log(this.state.contacts);
       if(this.state.status){
         console.log(this.state.contacts.usersContacts);
         {this.state.contacts.usersContacts.map(
@@ -90,7 +90,7 @@ showContact(){
                                                 />
                                             <ul className="text-center mt-1 pl-0">
                                                 <h6>{contact.name}</h6>
-                                                <h6>{contact.email}</h6>
+                                                <h6>Role: {contact.role}</h6>
                                                 <hr/>
                                                 <button className="btn light-primary-color"><i className="fa fa-envelope p-2" aria-hidden="true"></i>Write message</button>
                                                 <hr/>
