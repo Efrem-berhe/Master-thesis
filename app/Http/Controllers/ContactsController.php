@@ -105,6 +105,17 @@ class ContactsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     public function getnewContact($id)
+     {
+       //get contact by id
+       $contact = \App\User::where('id',$id)->first();
+
+
+       return response()
+            ->json($contact);
+
+     }
     public function show($id)
     {
 
@@ -141,6 +152,7 @@ class ContactsController extends Controller
         'contacts'=>$contacts,
         'usersContacts'=>$userContacts,
         'respondents'=>$respondents
+
       );
 
       return response()

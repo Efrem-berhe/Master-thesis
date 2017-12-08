@@ -43,7 +43,7 @@
 
                   <div class="navbar-nav ml-auto hidden-md-down">
                     <ul class="navbar-nav nav-item">
-                    <li class="hidden-xs"><a href="#" class=" nav-link add-project" data-toggle="modal" data-target="#add_project" style="padding-top:16px;padding-bottom:18px">Add Project</a></li>
+                    {{-- <li class="hidden-xs"><a href="#" class=" nav-link add-project" data-toggle="modal" data-target="#add_project" style="padding-top:16px;padding-bottom:18px">Add Project</a></li> --}}
                     <li>
                                        <a href="#" class="icon-info">
                                            <i class="nav-item nav-link fa fa-envelope" aria-hidden="true" style="padding-right:16px;color:white;padding-top:20px;padding-bottom:20px"></i>
@@ -118,7 +118,7 @@
 
 
 
-    <!-- Modal -->
+    {{-- <!-- Modal -->
     <div id="add_project" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
@@ -142,7 +142,7 @@
 
         </div>
     </div>
-</div>
+</div> --}}
 </body>
 
 <!-- Bootstrap core JavaScript

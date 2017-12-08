@@ -9,19 +9,15 @@ class Contacts extends Component {
       contacts:[],
       render:false,
       status:false,
-      showContact:true
+      showContact:true,
+      renderModal:false,
+      contactID:"",
     };
 
  this.getContacts=this.getContacts.bind(this);
- this.showContact = this.showContact.bind(this);
+ this.newContact = this.newContact.bind(this);
 
  console.log('constructor');
-  }
-
-showContact(){
-     this.setState({
-       showContact:false
-     });
   }
 
     getContacts() {
@@ -47,7 +43,13 @@ showContact(){
     console.log('willmoount');
     this.getContacts();
   }
+newContact(user){
 
+  this.setState({
+    showContact: false,
+    contactID:user.id,
+   });
+}
     render() {
       //console.log(this.state.contacts);
       if(this.state.status){
@@ -56,6 +58,18 @@ showContact(){
           (contact)=> <h4>1{this.state.contacts.usersContacts.name}</h4>
         )}
       }
+      console.log('back to users page');
+      console.log(this.props.users);
+      var color={
+        color:'white',
+      };
+      var titleColor={
+        color:'black',
+      };
+      var width={
+        width: '100%',
+      };
+
         return (
             <div>
 
@@ -68,7 +82,7 @@ showContact(){
                           <h4 id="step1"className="card-title">Contacts</h4>
                           <h6 className="card-subtitle">This are your contacts</h6>
                           </div>
-                            <button onClick={this.showContact} className="btn bg-color-orange"> + Add New Contact Now</button>
+                            <button className="btn bg-color-orange" data-toggle="modal" data-target="#add_project"> + Add New Contact Now</button>
                           </div>
                         </div>
 
@@ -92,14 +106,55 @@ showContact(){
                                                 <h6>{contact.name}</h6>
                                                 <h6>Role: {contact.role}</h6>
                                                 <hr/>
-                                                <button className="btn light-primary-color"><i className="fa fa-envelope p-2" aria-hidden="true"></i>Write message</button>
+                                                <button className="btn light-primary-color" style={width}><i className="fa fa-envelope p-2" aria-hidden="true"></i>Write message</button>
                                                 <hr/>
-                                                <button className="btn light-primary-color"><i className="fa fa-calendar p-2" aria-hidden="true"></i>Make Appointment</button>
+                                                <button className="btn light-primary-color" style={width}><i className="fa fa-calendar p-2" aria-hidden="true"></i>Make Appointment</button>
 
                                             </ul>
                                         </div>
                                     </a>
+
+                                    <div id="add_project" className="modal fade" role="dialog">
+                                          <div className="modal-dialog">
+
+                                              <div className="modal-content">
+                                                  <div className="modal-header login-header">
+                                                        <span className="title" style={color}>Add new contact </span>
+                                                  </div>
+
+                                                  <div className="modal-body">
+                                                  <ul className="list-group" id="contact-list">
+
+                                                    {this.props.users.map(
+                                                      (user,id)=>
+
+                                                           <li onClick={this.newContact.bind(this, user)} className="list-group-item mb-1" data-dismiss="modal" style={color}>
+                                                               <div className="col-xs-12 col-sm-3">
+                                                               <img className="rounded-circle"
+                                                                             src={user.avatar}
+                                                                             width="40"
+                                                                             height="40"
+                                                                             />
+                                                               </div>
+                                                               <div className="col-xs-12 col-sm-9">
+                                                                   <span className="name">{user.name}</span><br/>
+                                                                   <span className="visible-xs"> <span className="text-muted">{user.email}</span><br/></span>
+                                                               </div>
+
+                                                           </li>
+
+                                                    )}
+                                                  </ul>
+
+                                              </div>
+
+                                              </div>
+
+                                          </div>
+                                      </div>
+
                                 </div>
+
                               )):''
                             }
                             </div>
@@ -111,11 +166,12 @@ showContact(){
 
               ) : (
 
-                  <DisplayContacts users={this.props.users} />
+                  <DisplayContacts contactID={this.state.contactID} />
+
                 )
               }
 
-            </div>
+          </div>
         );
     }
 }

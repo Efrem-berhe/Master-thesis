@@ -8,9 +8,10 @@ class DisplayContacts extends Component {
   constructor(props){
     super(props);
     this.state ={
-      renderContacts:true,
+      renderContact:true,
       showModale:false,
       currentUser:"",
+      newContactadd:[],
       userid:"",
       role:"",
       sendPost:false
@@ -24,6 +25,7 @@ class DisplayContacts extends Component {
     this.addFamily = this.addFamily.bind(this);
     this.addFriend = this.addFriend.bind(this);
     this.send = this.send.bind(this);
+    this.getContact = this.getContact.bind(this);
 
   }
 
@@ -74,10 +76,29 @@ class DisplayContacts extends Component {
       });
    }
 
+getContact(){
+
+   var url_prefix = "/getnewContact/";
+   var url = url_prefix.concat(this.props.contactID);
+
+   var url =url;
+   $.ajax({
+       method: "GET",
+       url: url,
+   })
+     .done(function( result ) {
+       console.log(result);
+       this.setState({
+          newContactadd:result,
+          renderContact:true,
+        });
+      }.bind(this))
+}
+
    send(){
 
-   console.log(this.state.role);
-   console.log(this.state.userid);
+   //console.log(this.state.role);
+   //console.log(this.state.userid);
 
     $.ajax({
 
@@ -102,87 +123,101 @@ class DisplayContacts extends Component {
      this.handleCloseModal();
     }
 
-  render() {
+    componentWillMount(){
+      console.log('willmoount');
+      this.getContact();
+    }
 
+  render() {
+console.log('contact');
+//console.log(this.state.newContactadd.id);
+var width = {
+  width:'100%',
+};
+
+var black={
+  color:'black',
+};
       return (
 
 <div>
+          {this.state.renderContact ? (  <div>
 
-<div className="card mb-4">
-    <div className="card-header">
-      <h4 id="step1"className="card-title">Users</h4>
-      <h6 className="card-subtitle">Select a user to add as your friend or family or supervisor </h6>
-    </div>
+              <div className="card ">
+              <div className="card-header">
+                  <h4 id="step1"className="card-title">New User</h4>
+                  <h6 className="card-subtitle">You are adding a user</h6>
+              </div>
 
-    <div className="row">
-    <div className="col-md-12">
-    <div className="card-block pt-0">
-    <div className="row justify-content-wrap">
-      {this.props.users.map(
-        (user,id)=>
-        <div className="col-md-3  mt-3">
-            <a className="card text-center">
-                <div className="card-block p-2">
-                    <img className="rounded-circle"
-                        src={user.avatar}
-                        width="100"
-                        height="100"
-                        />
-                    <ul className="text-center mt-1 pl-0">
-                        <h6>{user.name}</h6>
-                        <h6>{user.email}</h6>
-                        <button onClick={this.handleOpenModal.bind(this, user)} className="btn bg-color-orange">Invite user </button>
-                    </ul>
+              <div className="row">
+                <div className="col-md-4 offset-1">
+                  <div className="card-block">
+                  <div className="card">
+                    <img className="card-img-top" src={this.state.newContactadd.avatar} alt="Card image cap"/>
+                    <div className="card-block text-center">
+                      <h4 className="card-title" style={black}>{this.state.newContactadd.name}</h4>
+                      <p className="card-text">{this.state.newContactadd.email}</p>
+                    </div>
+                    </div>
+                  </div>
                 </div>
-            </a>
-        </div>
 
-        )}
-        </div>
-        </div>
-        </div>
-        </div>
-  </div>
+                <div className="col-md-6 ">
+                  <div className="card-block">
 
-  <ReactModal
+                      <form className="form-horizontal">
+                      <fieldset>
+                      <legend>Add User Role</legend>
+                      <div className="form-group">
+                      <label className="control-label" htmlFor="rolename">User Role Name</label>
 
-     isOpen={this.state.showModal}
-     contentLabel="onRequestClose Example"
-     onRequestClose={this.handleCloseModal}
+                      <select className="form-control" id="exampleSelect1">
+                            <option>Supervisor</option>
+                            <option>Friend</option>
+                            <option>Family</option>
+                      </select>
+                      </div>
 
-     className="Modal"
+                      <div className="form-group">
+                      <label className=" control-label" htmlFor="permissions">Role Permissions</label>
+                        <hr/>
+                        <label className="custom-control custom-radio">
+                          <input id="radio1" name="radio" type="radio" className="custom-control-input"/>
+                          <span className="custom-control-indicator"></span>
+                          <span className="custom-control-description">Allow user to view all data</span>
+                        </label>
+                        <hr/>
+                        <label className="custom-control custom-radio">
+                          <input id="radio1" name="radio" type="radio" className="custom-control-input"/>
+                          <span className="custom-control-indicator"></span>
+                          <span className="custom-control-description">Allow user to view only my Survey result and Rank</span>
+                        </label>
+                        <hr/>
+                        <label className="custom-control custom-radio">
+                          <input id="radio1" name="radio" type="radio" className="custom-control-input"/>
+                          <span className="custom-control-indicator"></span>
+                          <span className="custom-control-description">Allow user to view only my Survey result and Badges</span>
+                        </label>
+                        <hr/>
+                      </div>
 
-     >
+                      <div className="form-group">
+                      <label className="control-label" htmlFor="savebutton"></label>
 
-     <div className="modal-dialog  d-flex justify-content-center align-items-center h-100" role="document">
-        <div className="modal-content modal-vh border-0">
-            <div className="modal-header modal-bg-color">
-                <h5 className="modal-title white-color">Add {this.state.currentUser} As Your </h5>
+                        <button id="savebutton" name="savebutton" className="btn btn-success" style={width}>Save</button>
 
-            </div>
+                      </div>
 
-            <button id="Supervisor" onClick={this.addSupervisor.bind(this, this.state.userid)} className="btn light-primary-color">
-                Supervisor
-            </button>
-            <div className="dropdown-divider"></div>
-            <button id="Family" onClick={this.addFamily.bind(this, this.state.userid)} className="btn light-primary-color">
-                  Family
-            </button>
-            <div className="dropdown-divider"></div>
-            <button id="Friend" onClick={this.addFriend.bind(this, this.state.userid)} className="btn light-primary-color">
-                  Friend
-            </button>
+                      </fieldset>
+                      </form>
+                      </div>
+                      </div>
+                      </div>
+              </div>
 
-            <div className="modal-footer modal-bg-color">
-              <button onClick={this.handleCloseModal} type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" onClick={this.send} className="btn bg-color-orange">Send Invitation</button>
-            </div>
+            </div>):("")}
 
-      </div>
 
-      </div>
-
-  </ReactModal>
 
 </div>
 );

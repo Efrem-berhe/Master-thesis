@@ -60,7 +60,7 @@ Route::post('uploadFile','ProfileController@upload_avatar');
 Route::get('/contacts', 'ContactsController@index')->name("Contacts");
 Route::get('/contacts/{contact}','ContactsController@show');
 Route::post('/contacts','ContactsController@store');
-
+Route::get('/getnewContact/{id}','ContactsController@getnewContact');
 //supervisor controller
 
 Route::get('/supervisor','SupervisorController@index')->name("Supervisor");
