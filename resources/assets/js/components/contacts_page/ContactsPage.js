@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import NoUsers from './NoUsers';
 
 import NoContacts from './NoContacts';
 import Contacts from './Contacts';
@@ -9,6 +10,7 @@ class ContactsPage extends Component {
       super();
       this.state = {
       users:[],
+      status:true,
       render:false
     };
 
@@ -24,13 +26,16 @@ class ContactsPage extends Component {
              url: url,
          })
            .done(function( result ) {
-
+             console.log(result);
                 this.setState({
                    users:result
                  });
+              if(!this.state.users.users.length == 0){
+                this.setState({status:false,});
+              }
               if(this.state.users.contacts.length == 0){
                 this.setState({
-                  render:true
+                  render:true,
                 });
               }else{
                 this.setState({
@@ -56,7 +61,11 @@ class ContactsPage extends Component {
       console.log(this.state.render);
         return (
             <div>
+
+                {this.state.status ?(<NoUsers />):(<div>
                 {this.state.render ? <NoContacts users={this.state.users.users}/> : <Contacts users={this.state.users.users}/>}
+                </div>)}
+
             </div>
         );
     }

@@ -60,6 +60,8 @@ class ContactsController extends Controller
          $user = Auth::user();
          $role = $request->input("role");
          $contact_id=$request->input("user_id");
+         $permission=$request->input("permission");
+
          //$contact = User::where('id', 1)->first();
          //$contact_role = $contact->roles()->first();
 
@@ -69,8 +71,13 @@ class ContactsController extends Controller
 
          $newContact = \App\User::where('id', $contact_id)->first();
          $newContact->roles()->detach();
+
          $role_user=\App\Role::where('name',$role)->first();
+         $permission = \App\Permission::where('name',$permission)->first();
+         $role_user->attachPermission($permission);
          $newContact->roles()->attach($role_user);
+
+
 
         //dd($request->input("role"));
          // $contact->role = $request->input("role");
@@ -138,20 +145,35 @@ class ContactsController extends Controller
       ->join('contacts','users.id','=','contacts.user_id')
       ->where('contacts.contact_id','=',$user->id)->select('users.*')->get();
 
-
        $userContacts = DB::table('users')
              ->join('contacts', 'users.id', '=', 'contacts.contact_id')
             ->select('users.*')
             ->where('contacts.user_id','=',$user->id)
             ->get();
 
+            $query = new \App\Contacts;
+            $query1 = new \App\User;
+            //$id = $user->id;
+          //get contacts that are not added to the respondent
+            $searchContacts= DB::table('users')
+            ->select('*')
+            ->whereNotIn('id',function($query){
+              $user = Auth::user();
+              $query->select('contact_id')->from('contacts')->where('user_id','=',$user->id);
+            })
+            ->whereNotIn('id',function($query1){
+              $user = Auth::user();
+              $query1->select('id')->from('users')->where('id','=',$user->id);
+            })
+            ->get();
 
       $users = array(
         'users'=>$users,
         'user_role'=>$user_role,
         'contacts'=>$contacts,
         'usersContacts'=>$userContacts,
-        'respondents'=>$respondents
+        'respondents'=>$respondents,
+        'searchContacts'=>$searchContacts
 
       );
 

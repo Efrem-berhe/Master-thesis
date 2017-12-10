@@ -7,11 +7,13 @@ class Contacts extends Component {
       super();
       this.state = {
       contacts:[],
+      users:[],
       render:false,
       status:false,
       showContact:true,
       renderModal:false,
       contactID:"",
+
     };
 
  this.getContacts=this.getContacts.bind(this);
@@ -20,7 +22,7 @@ class Contacts extends Component {
  console.log('constructor');
   }
 
-    getContacts() {
+  getContacts() {
       console.log('getContacts');
          var url ="/contacts/{1}";
          $.ajax({
@@ -42,7 +44,9 @@ class Contacts extends Component {
   componentWillMount(){
     console.log('willmoount');
     this.getContacts();
+
   }
+
 newContact(user){
 
   this.setState({
@@ -51,14 +55,16 @@ newContact(user){
    });
 }
     render() {
-      //console.log(this.state.contacts);
-      if(this.state.status){
-        console.log(this.state.contacts.usersContacts);
-        {this.state.contacts.usersContacts.map(
-          (contact)=> <h4>1{this.state.contacts.usersContacts.name}</h4>
-        )}
-      }
-      console.log('back to users page');
+
+      console.log(this.state.contacts);
+      // if(this.state.status){
+      //   console.log('this.state.contacts.usersContacts');
+      //   console.log(this.state.contacts.usersContacts);
+      //   {this.state.contacts.usersContacts.map(
+      //     (contact)=> <h4>1{this.state.contacts.usersContacts.name}</h4>
+      //   )}
+      // }
+      //console.log('back to users page');
       console.log(this.props.users);
       var color={
         color:'white',
@@ -75,6 +81,7 @@ newContact(user){
 
             {this.state.showContact ?
                 (
+
                   <div className="card">
                        <div className="card-header">
                           <div className="d-flex justify-content-between">
@@ -82,7 +89,7 @@ newContact(user){
                           <h4 id="step1"className="card-title">Contacts</h4>
                           <h6 className="card-subtitle">This are your contacts</h6>
                           </div>
-                            <button className="btn bg-color-orange" data-toggle="modal" data-target="#add_project"> + Add New Contact Now</button>
+                            <button onClick={this.getContacts} className="btn bg-color-orange" data-toggle="modal" data-target="#add_project"> + Add New Contact Now</button>
                           </div>
                         </div>
 
@@ -125,7 +132,7 @@ newContact(user){
                                                   <div className="modal-body">
                                                   <ul className="list-group" id="contact-list">
 
-                                                    {this.props.users.map(
+                                                    {this.state.contacts.searchContacts.map(
                                                       (user,id)=>
 
                                                            <li onClick={this.newContact.bind(this, user)} className="list-group-item mb-1" data-dismiss="modal" style={color}>
@@ -166,7 +173,7 @@ newContact(user){
 
               ) : (
 
-                  <DisplayContacts contactID={this.state.contactID} />
+                    <DisplayContacts contactID={this.state.contactID} />
 
                 )
               }

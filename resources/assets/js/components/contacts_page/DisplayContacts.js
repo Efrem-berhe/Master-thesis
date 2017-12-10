@@ -14,50 +14,72 @@ class DisplayContacts extends Component {
       newContactadd:[],
       userid:"",
       role:"",
-      sendPost:false
+      sendPost:false,
+      role:"",
+      permission:"",
 
     };
 
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
 
-    this.addSupervisor = this.addSupervisor.bind(this);
-    this.addFamily = this.addFamily.bind(this);
-    this.addFriend = this.addFriend.bind(this);
-    this.send = this.send.bind(this);
+
     this.getContact = this.getContact.bind(this);
 
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.supervisorChange = this.supervisorChange.bind(this);
+    this.familyChange = this.familyChange.bind(this);
+    this.friendChange = this.friendChange.bind(this);
+
+    this.supervisorPermission = this.supervisorPermission.bind(this);
+    this.familyPermission = this.familyPermission.bind(this);
+    this.friendPermission = this.friendPermission.bind(this);
+
   }
 
-  addSupervisor(userId){
+
+  supervisorChange(){
+    //console.log(event);
+    var e = document.getElementById("select_role");
+    var f = e.options[e.selectedIndex].value;
     this.setState({
-      role:"supervisor",
-      userid:userId,
-      sendPost:true
+      role: f,
     });
-  }
+    }
 
-  addFamily(userId){
-    this.setState({
-      role:"family",
-      userid:userId,
-      sendPost:true
-    });
+    familyChange(){
 
-  //this.send();
+      var e = document.getElementById("select_role");
+      var f = e.options[e.selectedIndex].value;
+      this.setState({
+        role: f,
+      });
+    }
 
+    friendChange(){
+      var e = document.getElementById("select_role");
+      var f = e.options[e.selectedIndex].value;
+      this.setState({
+        role: f,
+      });
+    }
 
-  }
-
-  addFriend(userId){
-  this.setState({
-    role:"friend",
-    userid:userId,
-    sendPost:true
-  });
-
-  }
-
+    supervisorPermission(event){
+      console.log(event);
+        this.setState({
+          permission: event.target.value,
+        });
+      }
+      familyPermission(event){
+        this.setState({
+          permission: event.target.value,
+        });
+      }
+      friendPermission(event){
+        this.setState({
+          permission: event.target.value,
+        });
+      }
 
 
     handleOpenModal (user) {
@@ -76,6 +98,37 @@ class DisplayContacts extends Component {
       });
    }
 
+
+   handleSubmit() {
+     //console.log('handleSubmit');
+     //console.log(event);
+     $.ajax({
+
+     headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+     },
+
+     type: "POST",
+     url: "/contacts",
+     dataType: 'json',
+     data: {
+     role: this.state.role,
+     user_id:this.state.newContactadd.id,
+     permission: this.state.permission},
+     success: function (response) {
+       console.log('response from display');
+       console.log(response);
+
+     }.bind(this),
+     error: function(jqXHR, textStatus, errorThrown) {
+       console.log(textStatus, errorThrown);
+     }.bind(this),
+
+   });
+
+
+    }
+
 getContact(){
 
    var url_prefix = "/getnewContact/";
@@ -87,7 +140,7 @@ getContact(){
        url: url,
    })
      .done(function( result ) {
-       console.log(result);
+
        this.setState({
           newContactadd:result,
           renderContact:true,
@@ -95,33 +148,6 @@ getContact(){
       }.bind(this))
 }
 
-   send(){
-
-   //console.log(this.state.role);
-   //console.log(this.state.userid);
-
-    $.ajax({
-
-       headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-       },
-
-       type: "POST",
-       url: "/contacts",
-       dataType: 'json',
-       data: {user_id:this.state.userid, role:this.state.role},
-       success: function (response) {
-         console.log(response);
-
-       }.bind(this),
-       error: function(jqXHR, textStatus, errorThrown) {
-         console.log(textStatus, errorThrown);
-       }.bind(this),
-
-     });
-
-     this.handleCloseModal();
-    }
 
     componentWillMount(){
       console.log('willmoount');
@@ -129,8 +155,9 @@ getContact(){
     }
 
   render() {
-console.log('contact');
-//console.log(this.state.newContactadd.id);
+
+console.log(this.state.role);
+console.log(this.state.permission);
 var width = {
   width:'100%',
 };
@@ -165,48 +192,49 @@ var black={
                 <div className="col-md-6 ">
                   <div className="card-block">
 
-                      <form className="form-horizontal">
+                      <form onSubmit={this.handleSubmit} className="form-horizontal">
                       <fieldset>
-                      <legend>Add User Role</legend>
-                      <div className="form-group">
-                      <label className="control-label" htmlFor="rolename">User Role Name</label>
+                        <legend>Add User Role</legend>
+                          <div className="form-group">
+                          <label className="control-label" htmlFor="rolename">User Role Name</label>
 
-                      <select className="form-control" id="exampleSelect1">
-                            <option>Supervisor</option>
-                            <option>Friend</option>
-                            <option>Family</option>
-                      </select>
-                      </div>
+                          <select className="form-control" onClick={this.supervisorChange}  id="select_role">
+                                <option value="supervisor">Supervisor</option>
+                                <option value="family">Family</option>
+                                <option value="friend">Friend</option>
+                          </select>
 
-                      <div className="form-group">
-                      <label className=" control-label" htmlFor="permissions">Role Permissions</label>
-                        <hr/>
-                        <label className="custom-control custom-radio">
-                          <input id="radio1" name="radio" type="radio" className="custom-control-input"/>
-                          <span className="custom-control-indicator"></span>
-                          <span className="custom-control-description">Allow user to view all data</span>
-                        </label>
-                        <hr/>
-                        <label className="custom-control custom-radio">
-                          <input id="radio1" name="radio" type="radio" className="custom-control-input"/>
-                          <span className="custom-control-indicator"></span>
-                          <span className="custom-control-description">Allow user to view only my Survey result and Rank</span>
-                        </label>
-                        <hr/>
-                        <label className="custom-control custom-radio">
-                          <input id="radio1" name="radio" type="radio" className="custom-control-input"/>
-                          <span className="custom-control-indicator"></span>
-                          <span className="custom-control-description">Allow user to view only my Survey result and Badges</span>
-                        </label>
-                        <hr/>
-                      </div>
+                          </div>
 
-                      <div className="form-group">
-                      <label className="control-label" htmlFor="savebutton"></label>
+                              <div className="form-group">
+                              <label className=" control-label" htmlFor="permissions">Role Permissions</label>
+                                <hr/>
+                                <label className="custom-control custom-radio">
+                                  <input onClick={this.supervisorPermission} value="supervisor" id="radio1" name="radio" type="radio" className="custom-control-input"/>
+                                  <span className="custom-control-indicator"></span>
+                                  <span className="custom-control-description">Allow user to view all data</span>
+                                </label>
+                                <hr/>
+                                <label className="custom-control custom-radio">
+                                  <input onClick={this.familyPermission} value="family" id="radio1" name="radio" type="radio" className="custom-control-input"/>
+                                  <span className="custom-control-indicator"></span>
+                                  <span className="custom-control-description">Allow user to view only my Survey result and Rank</span>
+                                </label>
+                                <hr/>
+                                <label className="custom-control custom-radio">
+                                  <input onClick={this.friendPermission} value="friend" id="radio1" name="radio" type="radio" className="custom-control-input"/>
+                                  <span className="custom-control-indicator"></span>
+                                  <span className="custom-control-description">Allow user to view only my Survey result and Badges</span>
+                                </label>
+                                <hr/>
+                              </div>
 
-                        <button id="savebutton" name="savebutton" className="btn btn-success" style={width}>Save</button>
+                            <div className="form-group">
+                            <label className="control-label" htmlFor="savebutton"></label>
 
-                      </div>
+                              <button type="submit"  className="btn btn-success" style={width}>Save</button>
+
+                            </div>
 
                       </fieldset>
                       </form>
@@ -216,8 +244,6 @@ var black={
               </div>
 
             </div>):("")}
-
-
 
 </div>
 );

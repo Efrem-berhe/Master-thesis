@@ -1,5 +1,6 @@
 <?php
 use App\Role;
+use App\Permission;
 
 use Illuminate\Database\Seeder;
 
@@ -37,10 +38,29 @@ class EntrustSetupTableSeeder extends Seeder
       $role_friend ->save();
 
 
-      // DB::table('permissions')->insert([
-      //     ["id"=>'1', "name"=>'access-all-respondent-data', "display_name"=>"can access all respondent data", "description"=>"Can access data of all respondent"],
-      //     ["id"=>'2', "name"=>'only-see-shared-data', "display_name"=>"only can see respondent data", "description"=>"can see data that is shared by respondent"],
-      // ]);
+      $permission_supervisor = new Permission();
+      $permission_supervisor->name='supervisor';
+      $permission_supervisor->display_name='Supervisor';
+      $permission_supervisor->description= 'Allow user to view all data';
+      $permission_supervisor->save();
+
+      $permission_family = new Permission();
+      $permission_family ->name='family';
+      $permission_family ->display_name='Family';
+      $permission_family ->description='Allow user to view only my Survey result and Rank';
+      $permission_family ->save();
+
+      $permission_friend = new Permission();
+      $permission_friend ->name='friend';
+      $permission_friend ->display_name='Friend';
+      $permission_friend ->description='Allow user to view only my Survey result and Badges';
+      $permission_friend ->save();
+
+      $permission_user = new Permission();
+      $permission_user->name='noPermission';
+      $permission_user->display_name='NoPermission';
+      $permission_user->description= 'has no permission given';
+      $permission_user->save();
 
     }
 }
