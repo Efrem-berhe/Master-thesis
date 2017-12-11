@@ -4,7 +4,6 @@ import RespondentRanking from './RespondentRanking.js';
 class RespondentRank extends Component {
   constructor(props) {
       super(props);
-
       this.state = {
       };
 
@@ -13,6 +12,7 @@ class RespondentRank extends Component {
   render() {
 
     var userId = this.props.currentUser;
+    console.log()
     var rankUsers = this.props.rankUsers.map(
       function (rank,index){
       return <RespondentRanking

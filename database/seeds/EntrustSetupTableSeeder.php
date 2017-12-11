@@ -57,9 +57,9 @@ class EntrustSetupTableSeeder extends Seeder
       $permission_friend ->save();
 
       $permission_user = new Permission();
-      $permission_user->name='noPermission';
-      $permission_user->display_name='NoPermission';
-      $permission_user->description= 'has no permission given';
+      $permission_user->name='createSurvey';
+      $permission_user->display_name='CreateSurvey';
+      $permission_user->description= 'Normal user';
       $permission_user->save();
 
     }

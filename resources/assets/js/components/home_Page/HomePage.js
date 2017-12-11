@@ -50,6 +50,8 @@ class HomePage extends  Component {
         })
             .done(function( result ) {
                 console.log('result')
+                console.log(result);
+
                 this.setState({home:result,
                 },function(){
                     this.setState({loaded:true}, function(){

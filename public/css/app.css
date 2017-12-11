@@ -13224,7 +13224,7 @@ header {
 }
 
 .sales {
-  background: #ffffff none repeat scroll 0 0;
+  background: #e9edf7 none repeat scroll 0 0;
   border: 1px solid #d4d9e3;
   display: inline-block;
   padding: 15px;
@@ -13259,7 +13259,7 @@ header {
   font-size: 21px;
   font-weight: 600;
   margin: 0;
-  padding-top: 25px;
+  padding-top: 20px;
 }
 
 .btn.btn-secondary.btn-lg.dropdown-toggle > span, .btn-group-lg > .btn.btn-secondary.dropdown-toggle > span {

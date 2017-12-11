@@ -66,11 +66,12 @@ class ContactsController extends Controller
          //$contact_role = $contact->roles()->first();
 
          $contact_role = \App\Role::where('name',$role)->select('id')->first();
+         $contact_permission = \App\Permission::where('name',$permission)->select('id')->first();
          //$user->roles()->attach($role);
-         $user = $user->addContact($contact_role->id, $contact_id);
+         $user = $user->addContact($contact_permission->id, $contact_role->id, $contact_id);
 
          $newContact = \App\User::where('id', $contact_id)->first();
-         $newContact->roles()->detach();
+         //$newContact->roles()->detach();
 
          $role_user=\App\Role::where('name',$role)->first();
          $permission = \App\Permission::where('name',$permission)->first();
@@ -113,16 +114,31 @@ class ContactsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+     public function contactPermission($id)
+     {
+       //get contact by id
+        //$contact = \App\User::where('id',$id)->first();
+        $user = Auth::user();
+        $user_permission = \App\Contacts::where('contact_id',$user->id)
+        ->where('user_id',$id)
+        ->first();
+        //$user = $user->contacts()->where('contact_id',$id)->first();
+
+       return response()
+            ->json($user_permission);
+
+     }
+
      public function getnewContact($id)
      {
        //get contact by id
        $contact = \App\User::where('id',$id)->first();
 
-
        return response()
             ->json($contact);
 
      }
+
     public function show($id)
     {
 
@@ -131,6 +147,8 @@ class ContactsController extends Controller
       //get user  role
       $role=$user->roles()->first();
       $user_role = $role->name;
+      //$user_permission = $role->permissions()->first();
+      //$user_permission = $user_permission->name;
 
       $users = \App\User::whereNotIn('id', [$user->id])->get();
 
@@ -146,7 +164,7 @@ class ContactsController extends Controller
       ->where('contacts.contact_id','=',$user->id)->select('users.*')->get();
 
        $userContacts = DB::table('users')
-             ->join('contacts', 'users.id', '=', 'contacts.contact_id')
+            ->join('contacts', 'users.id', '=', 'contacts.contact_id')
             ->select('users.*')
             ->where('contacts.user_id','=',$user->id)
             ->get();
@@ -173,7 +191,8 @@ class ContactsController extends Controller
         'contacts'=>$contacts,
         'usersContacts'=>$userContacts,
         'respondents'=>$respondents,
-        'searchContacts'=>$searchContacts
+        'searchContacts'=>$searchContacts,
+        //'user_permission',$user_permission
 
       );
 

@@ -1,6 +1,14 @@
 import React, {Component} from 'react';
 
 class RespondentRanking extends Component {
+  constructor(props) {
+      super(props);
+
+      this.state = {
+        renderRank:false,
+      };
+
+  }
 
     render() {
         var rank_class= '';
@@ -26,33 +34,36 @@ class RespondentRanking extends Component {
         }
 
         if (this.props.current_userId == this.props.user_id) {
+          this.state = {
+            renderRank:true,
+          };
            rank_class = "color-2 card rounded-0 border-right-0 border-left-0 border-top-0"
         }
         return (
 
             <div>
+                {this.state.renderRank ? (  <div className={rank_class}>
+                      <div className="row">
 
-                <div className={rank_class}>
-                    <div className="row">
+                          <div className=" w-25  d-flex align-items-center">
+                              <div className="card-block pt-3 resize-card d-flex align-items-center justify-content-center">
+                                  {ranking}
+                              </div>
+                          </div>
 
-                        <div className=" w-25  d-flex align-items-center">
-                            <div className="card-block pt-3 resize-card d-flex align-items-center justify-content-center">
-                                {ranking}
-                            </div>
-                        </div>
+                          <div className=" w-25 ">
+                              <div
+                                  className="card-block pt-3 resize-card d-flex align-items-center">
 
-                        <div className=" w-25 ">
-                            <div
-                                className="card-block pt-3 resize-card d-flex align-items-center">
+                                  <img className="card-img-top rounded img-fluid img-responsive mr-3"
+                                       src={this.props.user_avatar}
+                                       alt={this.props.user_avatar}
+                                       width={48} height={48}/>{this.props.user_name}
+                              </div>
+                          </div>
+                      </div>
+                  </div>):("")}
 
-                                <img className="card-img-top rounded img-fluid img-responsive mr-3"
-                                     src={this.props.user_avatar}
-                                     alt={this.props.user_avatar}
-                                     width={48} height={48}/>{this.props.user_name}
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         );
     }

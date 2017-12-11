@@ -37,12 +37,13 @@ class User extends Authenticatable
 
     }
 
-    public function addContact($role, $contact_id){
+    public function addContact($permission, $role, $contact_id){
 
        $user = Auth::user();
        $contact=new \App\Contacts;
        $contact->contact_id = $contact_id;
        $contact->user_id = $user->id;
+       $contact->permission= $permission;
        $contact->role=$role;
        $contact->save();
 

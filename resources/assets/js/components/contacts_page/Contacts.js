@@ -114,8 +114,6 @@ newContact(user){
                                                 <h6>Role: {contact.role}</h6>
                                                 <hr/>
                                                 <button className="btn light-primary-color" style={width}><i className="fa fa-envelope p-2" aria-hidden="true"></i>Write message</button>
-                                                <hr/>
-                                                <button className="btn light-primary-color" style={width}><i className="fa fa-calendar p-2" aria-hidden="true"></i>Make Appointment</button>
 
                                             </ul>
                                         </div>

@@ -63,7 +63,7 @@ class ContactsPage extends Component {
             <div>
 
                 {this.state.status ?(<NoUsers />):(<div>
-                {this.state.render ? <NoContacts users={this.state.users.users}/> : <Contacts users={this.state.users.users}/>}
+                {this.state.render ? <NoContacts users={this.state.users.users}/> : <Contacts />}
                 </div>)}
 
             </div>

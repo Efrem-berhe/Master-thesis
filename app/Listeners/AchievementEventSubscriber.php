@@ -19,6 +19,8 @@ class AchievementEventSubscriber
         $event->user->achievements()->attach($badge->id, ['complete_rate'=>1, 'is_achieved'=>true ]);
 
         $role_user=\App\Role::where('name','user')->first();
+        // $user_permission=\App\Permission::where('name','createSurvey')->first();
+        // $role_user->attachPermission($user_permission);
         $event->user->roles()->attach($role_user);
         event(new Points($event->user, $badge->point));
     }

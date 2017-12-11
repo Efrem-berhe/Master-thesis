@@ -59,6 +59,7 @@ Route::post('uploadFile','ProfileController@upload_avatar');
 //Contacts
 Route::get('/contacts', 'ContactsController@index')->name("Contacts");
 Route::get('/contacts/{contact}','ContactsController@show');
+Route::get('/contactPermission/{id}','ContactsController@contactPermission');
 Route::post('/contacts','ContactsController@store');
 Route::get('/getnewContact/{id}','ContactsController@getnewContact');
 //supervisor controller

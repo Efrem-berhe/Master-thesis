@@ -56,8 +56,8 @@ class HomeController extends Controller
         $role=$user->roles()->first();
         $user_role = $role->name;
         //respondent survey result
-        //$respondentSurvey=\App\User::where('id',$id)->first();
-        //$respondentSurveyResult = $respondentSurvey->getSurveyResult();
+        $respondentSurvey=\App\User::where('id',$id)->first();
+        $respondentSurveyResult = $respondentSurvey->getSurveyResult();
 
         $surveyResult=$user->getSurveyResult();
         $rankUsers= \App\User::orderBy('point','desc')->get();
@@ -73,7 +73,7 @@ class HomeController extends Controller
             'currentUser' =>$user,
             'users'=>$users,
             'user_role'=>$user_role,
-            //'respondentSurvey'=>$respondentSurveyResult
+            'respondentSurvey'=>$respondentSurveyResult
          );
         Auth::user()->flag = 1;
         Auth::user()->save();
