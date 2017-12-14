@@ -13224,7 +13224,7 @@ header {
 }
 
 .sales {
-  background: #e9edf7 none repeat scroll 0 0;
+  background: #14264e none repeat scroll 0 0;
   border: 1px solid #d4d9e3;
   display: inline-block;
   padding: 15px;
@@ -13254,7 +13254,7 @@ header {
 }
 
 .sales h2 {
-  color: #8492af;
+  color: #fff;
   float: left;
   font-size: 21px;
   font-weight: 600;

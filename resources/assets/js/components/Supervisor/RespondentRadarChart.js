@@ -55,6 +55,7 @@ class RespondentRadarChart extends Component {
                   <Radar name="Average result" dataKey="score_b" stroke="#82ca9d" strokeWidth={3} fill="#82ca9d" fillOpacity={0.3} />
                   <PolarGrid />
                   <Legend  />
+                  
                   <PolarAngleAxis dataKey={'name'} tick={<CustomizedTick />}/>
                   <PolarRadiusAxis angle={54}  domain={[0, 5]} />
                 </RadarChart>
@@ -83,7 +84,7 @@ class CustomizedTick extends Component {
                 </filter>
               </defs>
 
-              <text filter="url(#solid)" fontFamily={"'Raleway', sans-serif "}
+              <text fontFamily={"'Raleway', sans-serif "}
                     textAnchor={textAnchor}
                     fill="#212121">{payload.value}</text>
             </g>

@@ -22,6 +22,10 @@ class SupervisorController extends Controller
 
     }
 
+    // public function details(){
+    //
+    //   return view('pages.details');
+    // }
     /**
      * Show the form for creating a new resource.
      *
@@ -51,7 +55,8 @@ class SupervisorController extends Controller
      */
     public function show($id)
     {
-        //
+
+      //return response()->json('success');
     }
 
     /**

@@ -68,6 +68,10 @@ getRespondents() {
                   width: '40%',
                 }
 
+                var color={
+                  backgroundColor:'#5583fc',
+                  color:'white',
+                }
       console.log('renderRespondent if value');
         if(this.state.permission.permission == 1){
           console.log('supervisor');
@@ -75,7 +79,7 @@ getRespondents() {
               <tr className="text-center">
                  <th scope="row"  style={vertical}><i className="fa fa-trophy" aria-hidden="true"></i></th>
                  <td  style={vertical}>recent user rank
-                 <button className="btn btn-sm btn-primary btn-success">Read More</button>
+                 <button style={color} className="btn btn-sm">Read more >></button>
                  </td>
                  <td>
                      <RespondentRank
@@ -87,7 +91,7 @@ getRespondents() {
                <tr className="text-center">
                     <th scope="row" style={vertical}><i className="fa fa-certificate" aria-hidden="true"></i></th>
                     <td style={vertical}>recent receved badge
-                    <button className="btn btn-sm btn-primary btn-success">Read More</button>
+                    <button style={color} className="btn btn-sm">Read more >> </button>
                     </td>
                     <td>
                      <RespondentAchievement respondentID={this.props.respondentID}/>
@@ -102,7 +106,7 @@ getRespondents() {
               <tr className="text-center">
                  <th scope="row"  style={vertical}><i className="fa fa-trophy" aria-hidden="true"></i></th>
                  <td  style={vertical}>recent user rank
-                 <button className="btn btn-sm btn-primary btn-success">Read More</button>
+                 <button style={color} className="btn btn-sm">Read more >></button>
                  </td>
                  <td>
                      <RespondentRank
@@ -118,7 +122,7 @@ getRespondents() {
                   <tr className="text-center">
                     <th scope="row" style={vertical}><i className="fa fa-certificate" aria-hidden="true"></i></th>
                     <td style={vertical}>recent receved badge
-                    <button className="btn btn-sm btn-primary btn-success">Read More</button>
+                    <button style={color} className="btn btn-sm">Read more >></button>
                     </td>
                     <td>
                      <RespondentAchievement respondentID={this.props.respondentID}/>

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import RespondentRadarChart from './RespondentRadarChart';
 import UserContacts from './UserContacts';
+import DetailsPage from '../details_page/DetailsPage';
+
 class SupervisorPage extends Component {
     constructor(props) {
         super(props);
@@ -9,12 +11,22 @@ class SupervisorPage extends Component {
             respondent:[],
             renderRespondent:false,
             rankData:[],
+            respondetDetails:[],
         };
 
         this.getRespondents = this.getRespondents.bind(this);
+        this.renderDetails = this.renderDetails.bind(this);
     }
 
+renderDetails(respondent){
+  console.log('contact details page');
+  console.log(respondent);
+  this.setState({
+      renderRespondent:false,
+      respondetDetails:respondent,
+  });
 
+}
 getRespondents() {
       console.log('getContacts');
          var url ="/contacts/{1}";
@@ -65,7 +77,13 @@ getRespondents() {
           console.log('respondent');
           var width = {
             width: '40%',
+          };
+
+          var color={
+            backgroundColor:'#5583fc',
+            color:'white',
           }
+
         return (
 
             <div>
@@ -97,7 +115,7 @@ getRespondents() {
                                   <div className="card col-md-6 ml-3 mt-3 mb-3">
                                     <div className="card-block text-center">
                                     <RespondentRadarChart respondentSurveyResult={respondent.id}/>
-                                    <a  className="btn btn-success " href="/achievement">More badges</a>
+                                    <a style={color} onClick={this.renderDetails.bind(this,respondent)} className="btn">Read More >></a>
 
                                     </div>
                                   </div>
@@ -110,59 +128,10 @@ getRespondents() {
                     )}
 
                 </div>
-                ) :("")}
+              ) :(<DetailsPage respondentDetails = {this.state.respondetDetails} />)}
             </div>
         );
     }
 }
 
 export default SupervisorPage;
-
-// <div className="card col-md-2 mt-3 mb-3 ml-2 mr-2">
-//       <div className="card-block text-center">
-//       <RespondentAchievement respondentID={respondent.id}/>
-//       <a  className="btn btn-success btn-sm mt-2" href="/achievement">More badges</a>
-//
-//       </div>
-// </div>
-//
-// <div className="card col-md-4 mt-3 mb-3">
-//       <div className="card-block text-center">
-//               <RespondentRank
-//                   rankUsers = {this.state.rankData.rankUsers}
-//                   currentUser = {respondent.id}
-//                   />
-//               <a  className="btn btn-success mt-2" href="/achievement">More badges</a>
-//
-//       </div>
-// </div>
-
-// <div className="row card">
-//       <div className="card-header sales ">
-//         <h2>{respondent.name} Activities</h2>
-//          <div className="btn-group">
-//          <img src={respondent.avatar} width={80} height={80} className="img-responsive rounded-circle" />
-//          </div>
-//       </div>
-//       <div className="col-md-4 col-lg-2  col-sm-4 col-6 m-3">
-//         <button className="btn-lg card text-center">
-//           <div className="card-block p-1">
-//         <RespondentAchievement respondentID={respondent.id}/>
-//         </div>
-//         </button>
-//         </div>
-//         <RespondentRank
-//             rankUsers = {this.state.rankData.rankUsers}
-//             currentUser = {respondent.id}
-//             />
-//
-//             <div className="card text-center">
-//               <div className="card-block">
-//                   <RespondentRadarChart respondentSurveyResult={respondent.id}/>
-//                 <a href="#" className="btn btn-primary">Go somewhere</a>
-//               </div>
-//             </div>
-//       <div className="card-footer text-muted">
-//         2 days ago
-//       </div>
-//     </div>

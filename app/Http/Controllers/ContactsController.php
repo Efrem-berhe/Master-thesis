@@ -139,6 +139,12 @@ class ContactsController extends Controller
 
      }
 
+    public function feachQuestions($id){
+  $questions = \App\Question::where('category_id', $id)->get();
+      return response()
+           ->json($questions);
+    }
+
     public function show($id)
     {
 

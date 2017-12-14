@@ -14,6 +14,7 @@ import ChallengesPage from './challenges_page/ChallengesPage';
 import FooterComponent from './welcome_page/FooterComponent';
 import RespondentPage from './respondents_page/RespondentPage';
 import SupervisorPage from './Supervisor/SupervisorPage';
+//import DetailsPage from './details_page/DetailsPage';
 
 /**
  * include home page
@@ -76,3 +77,9 @@ if (document.getElementById('supervisor_page')) {
         <SupervisorPage/>,
         document.getElementById('supervisor_page'));
 }
+
+// if (document.getElementById('details_page')) {
+//     ReactDOM.render(
+//         <DetailsPage/>,
+//         document.getElementById('details_page'));
+// }
