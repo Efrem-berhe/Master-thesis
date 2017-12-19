@@ -175,7 +175,7 @@ li,ul{
 }
 
 .back-color{
-  background-color: #5583fc;
+  background-color: #009688;
 }
 
 /*Login Signup Page*/
@@ -188,7 +188,7 @@ li,ul{
 }
 
 #navigation {
-    background: #0e1a35;;
+    background: #b2dfdb;;
 }
 
 #navigation {
@@ -354,9 +354,9 @@ header {
 }
 
 .navi a {
-    border-bottom: 1px solid #0d172e;
-    border-top: 1px solid #0d172e;
-    color: #ffffff;
+    border-bottom: 1px solid #3f9788;
+    border-top: 1px solid #3f9788;
+    color: black;
     display: block;
     font-size: 17px;
     font-weight: 500;
@@ -366,18 +366,18 @@ header {
 
 .navi i {
     margin-right: 15px;
-    color: #5584ff;
+    color: black;
 }
 
 .navi .active a {
-    background: #122143;
-    border-left: 5px solid #5584ff;
+    background: #ff9800;
+    border-left: 5px solid #b2dfdb;
     padding-left: 15px;
 }
 
 .navi a:hover {
-    background: #122143 none repeat scroll 0 0;
-    border-left: 5px solid #5584ff;
+    background: #ff9800 none repeat scroll 0 0;
+    border-left: 5px solid #b2dfdb;
     display: block;
     padding-left: 15px;
 }
@@ -424,7 +424,7 @@ header {
     padding: 21px 0;
 }
 .sales {
-    background: #14264e none repeat scroll 0 0;
+    background: #009688 none repeat scroll 0 0;
     border: 1px solid #d4d9e3;
     display: inline-block;
     padding: 15px;
@@ -700,4 +700,23 @@ header {
     // padding: 16px 0 17px;
     // width: 100%;
 //}
+}
+
+// @media (min-width: 1200px){
+//   .container {
+//       width: 1251px;
+//       max-width: 100%;
+//   }
+//
+// }
+
+@media (min-width: 992px){
+  .navbar-toggleable-md > .container {
+      display: -webkit-box;
+      display: flex;
+      width: 1265px;
+      flex-wrap: nowrap;
+      -webkit-box-align: center;
+      align-items: center;
+  }
 }

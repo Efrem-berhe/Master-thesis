@@ -23,7 +23,6 @@ class DetailsPage extends Component {
 
 getDetails() {
 
-
               var url_prefix = "/home/";
               var url = url_prefix.concat(this.props.respondentDetails.id);
              //
@@ -41,19 +40,19 @@ getDetails() {
                   });
                 }.bind(this))
 
-        console.log('getDetail');
-         var url ="/supervisor/{1}";
-         $.ajax({
-             method: "GET",
-             url: url,
-         })
-           .done(function( result ) {
-             console.log(result);
-                //this.setState({
-                   //users:result
-                 //});
-
-            }.bind(this))
+        // console.log('getDetail');
+        //  var url ="/supervisor/{1}";
+        //  $.ajax({
+        //      method: "GET",
+        //      url: url,
+        //  })
+        //    .done(function( result ) {
+        //      console.log(result);
+        //         //this.setState({
+        //            //users:result
+        //          //});
+        //
+        //     }.bind(this))
 
     }
 
@@ -66,23 +65,46 @@ getDetails() {
   handleOnclick(event){
     console.log('event.value');
     console.log(event.value);
+    console.log(this.props.respondentDetails.id)
+    var url_prefix = "/feachQuestions";
 
-    var url_prefix = "/feachQuestions/";
-    var url = url_prefix.concat(event.value);
-
-    var url =url;
     $.ajax({
-        method: "GET",
-        url: url,
-    })
-      .done(function( result ) {
-        console.log('feachQuestions');
-        console.log(result);
-         this.setState({
-           categoryQuestions:result,
-           rowdata:true,
-         });
-       }.bind(this))
+
+    headers: {
+     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+
+    type: "POST",
+    url: "/feachQuestions",
+    dataType: 'json',
+    data: {
+    respondent_id:this.props.respondentDetails.id,
+    survey_id:event.value,
+  },
+    success: function (response) {
+      console.log('fatching quesiton and answers');
+      console.log(response);
+
+    }.bind(this),
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+    }.bind(this),
+
+   });
+    // var url =url;
+    // $.ajax({
+    //     method: "GET",
+    //     url: url,
+    // })
+    //   .done(function( result ) {
+    //
+    //     console.log(result);
+    //     console.log('feachQuestions and answer');
+    //      this.setState({
+    //        categoryQuestions:result,
+    //        rowdata:true,
+    //      });
+    //    }.bind(this))
 
   }
 
@@ -132,45 +154,50 @@ getDetails() {
                               <img src={this.props.respondentDetails.avatar} width={60} height={60} className="img-responsive rounded-circle" />
                              </div>
                         </div>
-                        <div className="row col-md-10 m-auto ml-3 mt-3 mb-3">
+                        <div className="row col-md-12 m-auto ml-3 mt-3 mb-3">
                           <div className="card-block text-center">
                           <ResponsiveContainer width="100%" height={300}>
 
-                              <BarChart data={barChart_data} margin={{top:40, right: 48}}>
-                                  <XAxis dataKey="name" />
+                              <BarChart barSize={30} data={barChart_data} margin={{top:40, right: 4}}>
+                                  <XAxis dataKey="name" tick={{ fontSize: 10 }}/>
                                   <YAxis label="Score" type="number" domain={[0, 5]} ticks={[0,1,2,3,4,5]}  />
                                   <CartesianGrid strokeDasharray="5 5"/>
                                   <Tooltip/>
                                   <Legend />
-                                <Bar dataKey="score_a" fill="#8884d8" onClick={this.handleOnclick}/>
+                                <Bar dataKey="score_a" fill="#ff9800" onClick={this.handleOnclick}>
+                                </Bar>
+                                <Bar dataKey="name" fill="#ff9800" />
+
                               </BarChart>
 
                           </ResponsiveContainer>
+                          <p className="content">latest survey result</p>
                           </div>
 
                         </div>
-                        <div className="row card col-md-10 m-auto ml-3 mt-3 mb-3">
+                        <div className="row card col-md-12 m-auto ml-3 mt-3 mb-3">
                               <div className="card-block ">
-                                  {this.state.rowdata ? (
+                              {this.state.rowdata ? (
 
-                                      <table class="table">
-                                      <thead class="thead-inverse">
-                                          <tr>
-                                            <th>#</th>
-                                            <th>Questions</th>
+                                  <table className="table">
+                                  <thead>
+                                      <tr>
+                                        <th>#</th>
+                                        <th>Questions</th>
+                                        <th>Answer</th>
 
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                      {this.state.categoryQuestions.map(
-                                        (question)=>
-                                            <tr>
-                                              <th scope="row">{counter++}</th>
-                                               <td style={fontsize}>{question.question}</td>
-                                            </tr>
-                                          )}
-                                       </tbody>
-                                       </table>):(<h4>Select a category to see the questions asked </h4>)}
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                  {this.state.categoryQuestions.map(
+                                    (question)=>
+                                        <tr>
+                                          <th scope="row">{counter++}</th>
+                                           <td style={fontsize}>{question.question}</td>
+                                        </tr>
+                                      )}
+                                   </tbody>
+                                   </table>):(<h4>Select a category to see the questions asked </h4>)}
                               </div>
                         </div>
 
@@ -187,6 +214,28 @@ getDetails() {
 }
 
 export default DetailsPage;
+//
+// {this.state.rowdata ? (
+//
+//     <table className="table">
+//     <thead>
+//         <tr>
+//           <th>#</th>
+//           <th>Questions</th>
+//           <th>Answer</th>
+//
+//         </tr>
+//       </thead>
+//       <tbody>
+//     {this.state.categoryQuestions.map(
+//       (question)=>
+//           <tr>
+//             <th scope="row">{counter++}</th>
+//              <td style={fontsize}>{question.question}</td>
+//           </tr>
+//         )}
+//      </tbody>
+//      </table>):(<h4>Select a category to see the questions asked </h4>)}
 
 // <ResponsiveContainer width="100%" height={300}>
 // {this.state.respondentSurveyData.respondentSurvey.resultEachCategoryByHour.map(

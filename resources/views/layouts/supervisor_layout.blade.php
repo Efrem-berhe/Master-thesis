@@ -21,8 +21,8 @@
 
   <div class="container-fluid w-100 h-100 Rail-way-font">
 
-      <nav class="navbar  navbar-toggleable-md fixed-top back-color" >
-          <div class="container" >
+     <nav class="navbar  navbar-toggleable-md fixed-top back-color" >
+          <div class="container" style="padding-right:0px">
 
               {{--navbar content for small screen--}}
 
@@ -42,16 +42,16 @@
                   {{--navbar content for middle screen--}}
 
                   <div class="navbar-nav ml-auto hidden-md-down">
-                    <ul class="navbar-nav nav-item">
+                    {{-- <ul class="navbar-nav nav-item"> --}}
                     {{-- <li class="hidden-xs"><a href="#" class=" nav-link add-project" data-toggle="modal" data-target="#add_project" style="padding-top:16px;padding-bottom:18px">Add Project</a></li> --}}
-                    <li>
+                    {{-- <li>
                                        <a href="#" class="icon-info">
                                            <i class="nav-item nav-link fa fa-envelope" aria-hidden="true" style="padding-right:16px;color:white;padding-top:20px;padding-bottom:20px"></i>
                                            <span class="label label-primary">3</span>
                                        </a>
                     </li>
 
-                   </ul>
+                   </ul> --}}
 
                       <a class="nav-link" data-toggle="dropdown" href="#" style="padding-top:14px;padding-bottom:14px">
                           <img src={{ Auth::user()->avatar }} class="rounded"
@@ -100,13 +100,13 @@
                 </div>
 
                 <div class="navi">
-                    <ul>
+                    <ul style="padding-left:0px">
                         <li class="{{ ends_with(Request::url(), 'supervisor') ? "active" : "" }}"><a href="/supervisor"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
                         <li class="{{ ends_with(Request::url(), '/supervisor/users') ? "active" : "" }}"><a href="/supervisor/users"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Respondents</span></a></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-md-10 col-sm-11 display-table-cell v-align">
+            <div class="col-md-10 mt-2 col-sm-11 display-table-cell v-align">
               @yield('content')
             </div>
         </div>

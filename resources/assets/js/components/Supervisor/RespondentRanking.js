@@ -5,13 +5,16 @@ class RespondentRanking extends Component {
       super(props);
 
       this.state = {
-        renderRank:false,
+        renderRank:true,
       };
 
   }
 
     render() {
         var rank_class= '';
+        var margin={
+          marginLeft:'20px',
+        }
         rank_class= "card rounded-0 border-top-0  border-right-0 border-left-0"
         var ranking;
         if(this.props.ranking == 1) {
@@ -30,13 +33,10 @@ class RespondentRanking extends Component {
                  alt={'third_place'}
                  />
         } else {
-            ranking=<p className="my-auto">{this.props.ranking}</p>
+            ranking=<p className="my-auto" style={margin}>{this.props.ranking}</p>
         }
 
         if (this.props.current_userId == this.props.user_id) {
-          this.state = {
-            renderRank:true,
-          };
            rank_class = "color-2 card rounded-0 border-right-0 border-left-0 border-top-0"
         }
         return (
@@ -58,7 +58,7 @@ class RespondentRanking extends Component {
                                   <img className="card-img-top rounded img-fluid img-responsive mr-3"
                                        src={this.props.user_avatar}
                                        alt={this.props.user_avatar}
-                                       width={48} height={48}/>{this.props.user_name}
+                                       width={219} height={41}/>{this.props.user_name}
                               </div>
                           </div>
                       </div>
@@ -70,3 +70,10 @@ class RespondentRanking extends Component {
 }
 
 export default RespondentRanking;
+
+// if (this.props.current_userId == this.props.user_id) {
+//   this.state = {
+//     renderRank:true,
+//   };
+//    rank_class = "color-2 card rounded-0 border-right-0 border-left-0 border-top-0"
+// }

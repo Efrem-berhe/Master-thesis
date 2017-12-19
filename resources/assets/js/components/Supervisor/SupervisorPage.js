@@ -115,7 +115,7 @@ getRespondents() {
                                   <div className="card col-md-6 ml-3 mt-3 mb-3">
                                     <div className="card-block text-center">
                                     <RespondentRadarChart respondentSurveyResult={respondent.id}/>
-                                    <a style={color} onClick={this.renderDetails.bind(this,respondent)} className="btn">Read More >></a>
+                                    <a onClick={this.renderDetails.bind(this,respondent)} className="btn btn-success">Read More >></a>
 
                                     </div>
                                   </div>

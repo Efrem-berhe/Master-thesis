@@ -22,7 +22,7 @@ class UserContacts extends Component {
 getRespondents() {
       console.log('getContacts');
          var url_prefix ="/contactPermission/";
-        var url = url_prefix.concat(this.props.respondentID);
+         var url = url_prefix.concat(this.props.respondentID);
          $.ajax({
              method: "GET",
              url: url,
@@ -79,19 +79,20 @@ getRespondents() {
               <tr className="text-center">
                  <th scope="row"  style={vertical}><i className="fa fa-trophy" aria-hidden="true"></i></th>
                  <td  style={vertical}>recent user rank
-                 <button style={color} className="btn btn-sm">Read more >></button>
+                 <button className="btn btn-sm btn-success">Read more >></button>
                  </td>
                  <td>
                      <RespondentRank
                        rankUsers = {this.state.rankData.rankUsers}
                        currentUser = {this.props.respondentID}
+                
                      />
                  </td>
                </tr>
                <tr className="text-center">
                     <th scope="row" style={vertical}><i className="fa fa-certificate" aria-hidden="true"></i></th>
                     <td style={vertical}>recent receved badge
-                    <button style={color} className="btn btn-sm">Read more >> </button>
+                    <button className="btn btn-sm btn-success">Read more >> </button>
                     </td>
                     <td>
                      <RespondentAchievement respondentID={this.props.respondentID}/>
@@ -106,7 +107,7 @@ getRespondents() {
               <tr className="text-center">
                  <th scope="row"  style={vertical}><i className="fa fa-trophy" aria-hidden="true"></i></th>
                  <td  style={vertical}>recent user rank
-                 <button style={color} className="btn btn-sm">Read more >></button>
+                 <button className="btn btn-sm btn-success">Read more >></button>
                  </td>
                  <td>
                      <RespondentRank
@@ -122,7 +123,7 @@ getRespondents() {
                   <tr className="text-center">
                     <th scope="row" style={vertical}><i className="fa fa-certificate" aria-hidden="true"></i></th>
                     <td style={vertical}>recent receved badge
-                    <button style={color} className="btn btn-sm">Read more >></button>
+                    <button className="btn btn-sm btn-success">Read more >></button>
                     </td>
                     <td>
                      <RespondentAchievement respondentID={this.props.respondentID}/>
@@ -130,12 +131,12 @@ getRespondents() {
                   </tr>
                 </tbody>
         }
-      console.log('permission');
+      console.log('permission checking ');
       console.log(this.state.permission);
       console.log(this.state.supervisor);
       console.log(this.state.friend);
 
-      console.log('permission');
+      console.log('permission if any error');
 
         return (
 

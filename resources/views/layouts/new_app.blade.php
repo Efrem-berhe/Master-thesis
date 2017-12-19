@@ -168,10 +168,9 @@
 </div>
 
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
-<script src={{ elixir("js/app.js")}}></script>
 
+<script src={{ elixir("js/app.js")}}></script>
 <script src="/js/intro.js"></script>
 <script src="/js/tour.js"></script>
-
 </body>
 </html>

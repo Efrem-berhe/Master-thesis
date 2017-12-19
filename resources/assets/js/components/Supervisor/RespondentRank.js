@@ -15,6 +15,7 @@ class RespondentRank extends Component {
     console.log()
     var rankUsers = this.props.rankUsers.map(
       function (rank,index){
+      if (index < 2 || rank.id == userId) {
       return <RespondentRanking
         current_userId={userId}
         key={rank.id}
@@ -24,25 +25,8 @@ class RespondentRank extends Component {
         user_id={rank.id}
         level={rank.level}
         points={rank.point} />
-    });
-
-    if (this.props.mode == 'short'){
-
-       rankUsers = this.props.rankUsers.map(
-        function (rank,index){
-          if (index < 3 || rank.id == userId) {
-            return <RankElement
-              current_userId={userId}
-              key={rank.id}
-              ranking={index+1}
-              user_avatar={rank.avatar}
-              user_name={rank.name}
-              user_id={rank.id}
-              level={rank.level}
-              points={rank.point} />
           }
-        });
-    }
+    });
 
     return (
       <div>

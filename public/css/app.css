@@ -12982,7 +12982,7 @@ li, ul {
 }
 
 .back-color {
-  background-color: #5583fc;
+  background-color: #009688;
 }
 
 /*Login Signup Page*/
@@ -12992,7 +12992,7 @@ li, ul {
 }
 
 #navigation {
-  background: #0e1a35;
+  background: #b2dfdb;
 }
 
 #navigation {
@@ -13155,9 +13155,9 @@ header {
 }
 
 .navi a {
-  border-bottom: 1px solid #0d172e;
-  border-top: 1px solid #0d172e;
-  color: #ffffff;
+  border-bottom: 1px solid #3f9788;
+  border-top: 1px solid #3f9788;
+  color: black;
   display: block;
   font-size: 17px;
   font-weight: 500;
@@ -13167,18 +13167,18 @@ header {
 
 .navi i {
   margin-right: 15px;
-  color: #5584ff;
+  color: black;
 }
 
 .navi .active a {
-  background: #122143;
-  border-left: 5px solid #5584ff;
+  background: #ff9800;
+  border-left: 5px solid #b2dfdb;
   padding-left: 15px;
 }
 
 .navi a:hover {
-  background: #122143 none repeat scroll 0 0;
-  border-left: 5px solid #5584ff;
+  background: #ff9800 none repeat scroll 0 0;
+  border-left: 5px solid #b2dfdb;
   display: block;
   padding-left: 15px;
 }
@@ -13224,7 +13224,7 @@ header {
 }
 
 .sales {
-  background: #14264e none repeat scroll 0 0;
+  background: #009688 none repeat scroll 0 0;
   border: 1px solid #d4d9e3;
   display: inline-block;
   padding: 15px;
@@ -13508,6 +13508,17 @@ header {
   }
 }
 
+@media (min-width: 992px) {
+  .navbar-toggleable-md > .container {
+    display: -webkit-box;
+    display: flex;
+    width: 1265px;
+    flex-wrap: nowrap;
+    -webkit-box-align: center;
+    align-items: center;
+  }
+}
+
 .c-list {
   padding: 0px;
   min-height: 44px;
@@ -13582,6 +13593,38 @@ ul.c-controls li a:hover {
 .c-info {
   padding: 5px 10px;
   font-size: 1.25em;
+}
+
+#custom-search-input {
+  padding: 3px;
+  border: solid 1px #E4E4E4;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+#custom-search-input input {
+  border: 0;
+  box-shadow: none;
+}
+
+#custom-search-input button {
+  margin: 2px 0 0 0;
+  background: none;
+  box-shadow: none;
+  border: 0;
+  color: #666666;
+  padding: 0 8px 0 10px;
+  border-left: solid 1px #ccc;
+}
+
+#custom-search-input button:hover {
+  border: 0;
+  box-shadow: none;
+  border-left: solid 1px #ccc;
+}
+
+#custom-search-input .glyphicon-search {
+  font-size: 23px;
 }
 
 /*# sourceMappingURL=app.css.map */

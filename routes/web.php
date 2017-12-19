@@ -57,10 +57,11 @@ Route::get('profile', 'ProfileController@index')->name("Profile");
 Route::post('uploadFile','ProfileController@upload_avatar');
 
 //Contacts
-Route::get('/contacts', 'ContactsController@index')->name("Contacts");
-Route::get('/feachQuestions/{id}','ContactsController@feachQuestions');
+Route::get('/contacts', 'ContactsController@index')->name('contacts');
+Route::post('/feachQuestions','ContactsController@feachQuestions');
 Route::get('/contacts/{contact}','ContactsController@show');
 Route::get('/contactPermission/{id}','ContactsController@contactPermission');
+Route::get('/delete/{delete}','ContactsController@delete');
 Route::post('/contacts','ContactsController@store');
 Route::get('/getnewContact/{id}','ContactsController@getnewContact');
 //supervisor controller

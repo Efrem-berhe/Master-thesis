@@ -46,6 +46,8 @@ class ContactsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
     public function store(Request $request)
     {
 
@@ -53,9 +55,6 @@ class ContactsController extends Controller
 
         //get the current user
          //$contact = new \App\Contacts;
-
-
-
 
          $user = Auth::user();
          $role = $request->input("role");
@@ -68,7 +67,12 @@ class ContactsController extends Controller
          $contact_role = \App\Role::where('name',$role)->select('id')->first();
          $contact_permission = \App\Permission::where('name',$permission)->select('id')->first();
          //$user->roles()->attach($role);
-         $user = $user->addContact($contact_permission->id, $contact_role->id, $contact_id);
+         $user3 = $user->contacts()->where('contact_id',$contact_id)->first();
+         if($user3==null){
+           $user1 = $user->addContact($contact_permission->id, $contact_role->id, $contact_id);
+         }else{
+           $user2 = $user->updateContact($contact_permission->id, $contact_role->id, $contact_id);
+         }
 
          $newContact = \App\User::where('id', $contact_id)->first();
          //$newContact->roles()->detach();
@@ -139,10 +143,17 @@ class ContactsController extends Controller
 
      }
 
-    public function feachQuestions($id){
-  $questions = \App\Question::where('category_id', $id)->get();
+    public function feachQuestions(Request $request){
+      $user = Auth::user();
+
+      $respondent_id=$request->input("respondent_id");
+      $survey_id=$request->input("survey_id");
+
+      //$user_servey_id = \App\Survey_user::where('user_id',$user->id)
+      //->where('survey_id',$id)->get()->last();
+      //$questions = \App\Question::where('category_id', $id)->get();
       return response()
-           ->json($questions);
+           ->json($survey_id);
     }
 
     public function show($id)
@@ -236,8 +247,26 @@ class ContactsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     public function delete($id){
+       $user = Auth::user();
+       $deleted = DB::table('contacts')->where('contact_id', '=', $id)
+                            ->where('user_id','=',$user->id)
+                            ->delete();
+
+        return redirect()->route('/contacts');
+        return response()
+             ->json('success');
+     }
     public function destroy($id)
     {
-        //
+      $user = Auth::user();
+      $deleted = DB::table('contacts')->where('contact_id', '=', $id)
+                           ->where('user_id','=',$user->id)
+                           ->delete();
+
+       return redirect()->route('/contacts');
+       return response()
+            ->json('success');
     }
 }

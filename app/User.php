@@ -60,6 +60,21 @@ class User extends Authenticatable
 
     return $contact;
     }
+
+    public function updateContact($permission, $role, $contact_id){
+      $user = Auth::user();
+      $contact = $user->contacts()->where('contact_id',$contact_id)->first();
+      $contact->permission= $permission;
+      $contact->role=$role;
+      $contact->save();
+
+      $update_user_role = \App\User::where('id',$contact_id)->first();
+      $role =\App\Role::where('id',$role)->first();
+      $update_user_role->role=$role->name;
+      $update_user_role->save();
+
+      return $contact;
+    }
 //one to many
     public function roles(){
       return $this->belongsToMany('App\Role');

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import ReactModal from 'react-modal';
-
 import PropTypes from 'prop-types';
 
 class DisplayContacts extends Component {
@@ -34,7 +33,7 @@ class DisplayContacts extends Component {
     this.supervisorPermission = this.supervisorPermission.bind(this);
     this.familyPermission = this.familyPermission.bind(this);
     this.friendPermission = this.friendPermission.bind(this);
-
+    this.deleteUser = this.deleteUser.bind(this);
   }
 
 
@@ -128,7 +127,62 @@ class DisplayContacts extends Component {
 
 
     }
+deleteUser(contactId){
+  console.log('contactId form deleteUser');
+  console.log(contactId);
+  var url_prefix = "/delete/";
+  var url = url_prefix.concat(contactId);
+  var url =url;
 
+  var url =url;
+  $.ajax({
+      method: "GET",
+      url: url,
+  })
+    .done(function( result ) {
+      this.setState({
+        renderContact:false,
+      }
+      );
+     }.bind(this))
+
+  this.props.deleteOnclick();
+  //   $.ajax({
+  //
+  //   headers: {
+  //    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  //   },
+  //
+  //
+  //   type: "get",
+  //   url:url,
+  //   dataType: 'json',
+  //   data: {
+  //    id: contactId},
+  //   success: function (response) {
+  //     console.log(response);
+  //
+  //   }.bind(this),
+  //   error: function(jqXHR, textStatus, errorThrown) {
+  //     console.log(textStatus, errorThrown);
+  //   }.bind(this),
+  //
+  // });
+
+  var url =url;
+  $.ajax({
+      method: "GET",
+      url: url,
+  })
+    .done(function( result ) {
+
+      this.setState({
+         newContactadd:result,
+         renderContact:true,
+       });
+     }.bind(this))
+
+}
 getContact(){
 
    var url_prefix = "/getnewContact/";
@@ -158,6 +212,8 @@ getContact(){
 
 console.log(this.state.role);
 console.log(this.state.permission);
+console.log(this.state.renderContact);
+
 var width = {
   width:'100%',
 };
@@ -172,20 +228,22 @@ var black={
 
               <div className="card ">
               <div className="card-header">
-                  <h4 id="step1"className="card-title">New User</h4>
-                  <h6 className="card-subtitle">You are adding a user</h6>
+                  <h4 id="step1"className="card-title">Supervisor</h4>
+                  <h6 className="card-subtitle">You can add or edit this user</h6>
               </div>
 
               <div className="row">
                 <div className="col-md-4 offset-1">
                   <div className="card-block">
-                  <div className="card">
-                    <img className="card-img-top" src={this.state.newContactadd.avatar} alt="Card image cap"/>
-                    <div className="card-block text-center">
-                      <h4 className="card-title" style={black}>{this.state.newContactadd.name}</h4>
-                      <p className="card-text">{this.state.newContactadd.email}</p>
-                    </div>
-                    </div>
+                      <div className="card">
+                        <img className="card-img-top" src={this.state.newContactadd.avatar} alt="Card image cap"/>
+                          <div className="card-block text-center">
+                            <h4 className="card-title" style={black}>{this.state.newContactadd.name}</h4>
+                            <p className="card-text">{this.state.newContactadd.email}</p>
+                            <button onClick={this.deleteUser.bind(this,this.state.newContactadd.id)} className="btn btn-sm btn-success" style={width}>Delete user</button>
+                          </div>
+                      </div>
+
                   </div>
                 </div>
 
@@ -232,7 +290,7 @@ var black={
                             <div className="form-group">
                             <label className="control-label" htmlFor="savebutton"></label>
 
-                              <button type="submit"  className="btn btn-success" style={width}>Save</button>
+                              <button type="submit" className="btn btn-success" style={width}>Save</button>
 
                             </div>
 
